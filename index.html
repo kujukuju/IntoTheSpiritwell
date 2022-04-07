@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no">
     <title>Kodama Game</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -10,7 +11,7 @@
 </head>
 <body>
     <script>
-        if (window.innerWidth <= 1200) {
+        if (window.innerWidth <= 1200) {    
             document.body.classList.add('mobile');
         } else {
             document.body.classList.remove('mobile');
@@ -37,8 +38,9 @@
     <div id="scroll-target"></div>
     <div class="descriptionBackground">
         <div id="description">
-            <p class="description top">Into the Spiritwell is an action-based, roguelike, platformer, party-game.</p>
-            <p class="description bottom">No more dying repeatedly to a boss alone, but rather dying happily with friends!</p>
+            <!--  -->
+            <p class="description top" id="description-top">Fight against the corrupted forest, discover different elemental transformations, and find unique combinations to return to the Spiritwell with your friends!</p>
+            <p class="description bottom" id="description-bottom">Careful of your shared lives, once you're out, you'll only be able to bring some knowledge back through the Spiritwell for your next attempt.</p>
         </div>
     </div>
     <div class="subscribe">
@@ -46,16 +48,11 @@
         <div class="padding"></div>
         <div class="half">
             <img class="subscribeImage" draggable="false" alt="" src="subscribe.png" />
-            <!-- <div class="title">
-                SUBSCRIBE TO OUR NEWSLETTER
-            </div>
-            <p class="text">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-            </p> -->
-            <div class="button">
-                <input type="email" placeholder="Email" />
-                <button>Subscribe</button>
-            </div>
+            <form action="https://veraegames.us7.list-manage.com/subscribe/post?u=51d8942997a13c89dde0dd07f&amp;id=b2da44877c" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="button" target="_blank" novalidate>
+                <input type="email" placeholder="Email" name="EMAIL" id="mce-EMAIL" required>
+                <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_51d8942997a13c89dde0dd07f_b2da44877c" tabindex="-1" value=""></div>
+                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe">
+            </form>
         </div>
         <div class="center"></div>
         <div class="half">
@@ -82,9 +79,15 @@
             </div>
             <div class="moreInformation" id="information-1">
                 <div>
-                    <p>Sacrifice your character to produce elements and combine them for big spells!</p>
-                    <p>Solve puzzles and take down enemies.</p>
-                    <p>Work with your teammates to figure out all of the interactions.</p>
+                    <div>
+                        <p>Sacrifice your character to produce elements and combine them for powerful results!</p>
+                    </div>
+                    <div>
+                        <p>Use these elemental effects to unlock new areas, defeat enemies, and progress.</p>
+                    </div>
+                    <div>
+                        <p>Work with your teammates to discover all the different interactions.</p>
+                    </div>
                 </div>
                 <div class="moreButton hide" id="hide-1">HIDE</div>
             </div>
@@ -110,8 +113,12 @@
             </div>
             <div class="moreInformation" id="information-2">
                 <div>
-                    <p>Get online to tackle puzzles with your friends and work together...</p>
-                    <p>Or not.</p>
+                    <div>
+                        <p>Work together with your friends...</p>
+                    </div>
+                    <div>
+                        <p>Or not.</p>
+                    </div>
                 </div>
                 <div class="moreButton hide" id="hide-2">HIDE</div>
             </div>
@@ -140,9 +147,18 @@
             </div>
             <div class="moreInformation" id="information-3">
                 <div>
-                    <p>What is a game without some big baddies?</p>
-                    <p>Of course you'll have to face the corruption of the forest head on!</p>
-                    <p>Take on boss battles. Use your elemental powers to overcome these challenges!</p>
+                    <div>
+                        <p>Bosses are both straight up fights and complex puzzles.</p>
+                    </div>
+                    <div>
+                        <p>Take advantage of their weaknesses with your elemental transformations.</p>
+                    </div>
+                    <div>
+                        <p>Defeat them to steal their powers and discover even more interactions.</p>
+                    </div>
+                    <div>
+                        <p>That's the spirit!</p>
+                    </div>
                 </div>
                 <div class="moreButton hide" id="hide-3">HIDE</div>
             </div>

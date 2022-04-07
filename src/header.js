@@ -1,22 +1,6 @@
-const MOBILE = window.orientation !== undefined && window.DeviceOrientationEvent;
+const MOBILE = !!(window.orientation !== undefined && window.DeviceOrientationEvent);
 
 const headers = [
-
-];
-
-// [
-//     [root, [
-//         [element, position, movement],
-//         ...,
-//     ]],
-//     ...,
-// ]
-const parallax = [
-
-];
-
-// [0, 0.4, 1.0, ...]
-const parallaxDistances = [
 
 ];
 
@@ -30,18 +14,6 @@ const widths = [
     1.10,
     1.10,
     1.10,
-
-
-    // 1.00,
-    // 1.04,
-    // 1.08,
-    // 1.12,
-    // 1.16,
-    // 1.20,
-    // 1.24,
-    // 1.28,
-    // 1.32,
-    // 1.32,
 ];
 
 // movement based on a given 100vw image, so 1 is nothing, 2 is 50% in each side
@@ -55,16 +27,6 @@ const movement = [
     1 + 0.22,
     1 + 0.30,
     1 + 0.32,
-    // 1.00,
-    // 1.04,
-    // 1.08,
-    // 1.12,
-    // 1.16,
-    // 1.20,
-    // 1.24,
-    // 1.28,
-    // 1.32,
-    // 1.32,
 ];
 
 for (let i = 0; i < movement.length; i++) {
@@ -81,31 +43,13 @@ const verticalMovement = [
     1 + 0.007,
     1 + 0.010,
     1,
-
-    // 1,
-    // 1,
-    // 1,
-    // 1,
-    // 1,
-    // 1,
-    // 1,
-    // 1,
-    // 1,
-
-    // 1 - 0.012,
-    // 1 - 0.006,
-    // 1 + 0.000,
-    // 1 + 0.006,
-    // 1 + 0.012,
-    // 1 + 0.018,
-    // 1 + 0.012,
-    // 1 + 0.030,
-    // 1,
 ];
 
 let scrollArrowElement = null;
 let scrollTargetElement = null;
 let descriptionElement = null;
+let topDescriptionElement = null;
+let bottomDescriptionElement = null;
 
 let lastRenderTime = 0;
 const realizedMouseOffset = [0, 0];
@@ -145,69 +89,6 @@ window.addEventListener('load', () => {
         }
     }
 
-    // initializeParallax(document.getElementById('parallax-1'), [
-    //     document.getElementById('1-1'),
-    //     document.getElementById('1-2'),
-    //     document.getElementById('1-3'),
-    //     document.getElementById('1-4'),
-    //     document.getElementById('1-5'),
-    //     document.getElementById('1-6'),
-    // ], [
-    //     [-248, -155],
-    //     [194, -92],
-    //     [-242, -20],
-    //     [-14, 167],
-    //     [0, 0],
-    //     [200, 90],
-    // ], [
-    //     1.35,
-    //     1.25,
-    //     1.15,
-    //     1.05,
-    //     1,
-    //     0.9,
-    // ]);
-
-    // initializeParallax(document.getElementById('parallax-2'), [
-    //     document.getElementById('2-1'),
-    //     document.getElementById('2-2'),
-    //     document.getElementById('2-3'),
-    //     document.getElementById('2-4'),
-    //     document.getElementById('2-5'),
-    // ], [
-    //     [-145, -232],
-    //     [140, -200],
-    //     [-288, -148],
-    //     [0, 0],
-    //     [321, -64],
-    // ], [
-    //     1.2,
-    //     1.15,
-    //     1.1,
-    //     1,
-    //     0.85,
-    // ]);
-
-    // initializeParallax(document.getElementById('parallax-3'), [
-    //     document.getElementById('3-1'),
-    //     document.getElementById('3-2'),
-    //     document.getElementById('3-3'),
-    //     document.getElementById('3-4'),
-    //     document.getElementById('3-5'),
-    // ], [
-    //     [-214, -360],
-    //     [130, -230],
-    //     [350, 60],
-    //     [-40, -20],
-    //     [-170, 170],
-    // ], [
-    //     1.15,
-    //     1.1,
-    //     1.05,
-    //     1,
-    //     0.95,
-    // ]);
-
     initializeInformation(
         document.getElementById('callout-1'),
         document.getElementById('information-1'),
@@ -235,30 +116,14 @@ window.addEventListener('load', () => {
     );
 
     descriptionElement = document.getElementById('description');
+    topDescriptionElement = document.getElementById('description-top');
+    bottomDescriptionElement = document.getElementById('description-bottom');
 
     scrollCallback();
     adjustBossImages();
 
     window.requestAnimationFrame(animationFrame);
 });
-
-const initializeParallax = (root, elements, positions, movements) => {
-    if (elements.length !== movements.length || elements.length !== positions.length) {
-        console.error('Movements must match elements must match positions.');
-        return;
-    }
-
-    const list = [];
-    parallax.push([root, list]);
-    parallaxDistances.push(0);
-
-    for (let i = 0; i < elements.length; i++) {
-        list.push([elements[i], positions[i], movements[i]]);
-
-        elements[i].style.left = positions[i][0] + 'px';
-        elements[i].style.top = positions[i][1] + 'px';
-    }
-};
 
 const initializeInformation = (title, information, more, hide) => {
     more.addEventListener('click', event => {
@@ -292,22 +157,23 @@ const mouseMoveCallback = (x, y) => {
 };
 
 const scrollCallback = () => {
-    for (let i = 0; i < parallax.length; i++) {
-        const root = parallax[i][0];
-        const bounding = root.getBoundingClientRect();
-        const rootTop = bounding.top;
-
-        const rangeTop = -bounding.height;
-        const rangeBottom = window.innerHeight;
-
-        const progress = Math.max(Math.min((rootTop - rangeTop) / (rangeBottom - rangeTop), 1), 0);
-        parallaxDistances[i] = 1 - progress;
-    }
-
     if (descriptionElement) {
         const descriptionBottom = descriptionElement.getBoundingClientRect().bottom;
         if (descriptionBottom <= window.innerHeight) {
             scrollArrowElement.classList.add('hidden');
+        }
+    }
+
+    if (topDescriptionElement) {
+        const topDescriptionBottom = topDescriptionElement.getBoundingClientRect().bottom;
+        if (topDescriptionBottom <= window.innerHeight * 0.85) {
+            topDescriptionElement.classList.add('visible');
+        }
+    }
+    if (bottomDescriptionElement) {
+        const bottomDescriptionBottom = bottomDescriptionElement.getBoundingClientRect().bottom;
+        if (bottomDescriptionBottom <= window.innerHeight * 0.85) {
+            bottomDescriptionElement.classList.add('visible');
         }
     }
 };
@@ -321,7 +187,9 @@ window.addEventListener("deviceorientation", event => {
         return;
     }
 
-    playingDefaultAnimation = false;
+    if (playingDefaultAnimation) {
+        return;
+    }
 
     const x = Math.min(Math.max((event.gamma || 0) / 25, -1), 1);
     const y = Math.min(Math.max(((event.beta || 0) - 45) / 25, -1), 1);
@@ -378,8 +246,17 @@ const animationFrame = () => {
         const progress = Math.min((now - defaultAnimationStartTime) / 4000, 1);
         realizedMouseOffset[0] = -Math.cos(progress * Math.PI);
         realizedMouseOffset[1] = -Math.cos(progress * Math.PI);
+
+        if (progress >= 1) {
+            playingDefaultAnimation = false;
+        }
     }
 
+    let headerOffsetX = 0;
+    if (window.innerHeight > window.innerWidth) {
+        headerOffsetX = (realizedMouseOffset[0] + 1) / 2;
+        headerOffsetX *= -(window.innerHeight - window.innerWidth) / window.innerWidth;
+    }
     for (let i = 0; i < headers.length; i++) {
         const scaledMouseOffsetX = (Math.sin(realizedMouseOffset[0] * Math.PI / 2) * 0.25 + realizedMouseOffset[0] * 0.75) * 0.625;
         // const scaledMouseOffsetX = realizedMouseOffset[0] * 0.625;
@@ -391,24 +268,8 @@ const animationFrame = () => {
 
         const additionalOffsetY = -(verticalMovement[i] - 1) / 2 * (1 - realizedMouseOffset[1]);
 
-        headers[i].style.left = (offset * 100) + 'vw';
+        headers[i].style.left = (offset * 100 + headerOffsetX * 100) + 'vw';
         headers[i].style.top = (additionalOffsetY * 100) + 'vw';
-    }
-
-    for (let i = 0; i < parallax.length; i++) {
-        const [root, list] = parallax[i];
-        for (let a = 0; a < list.length; a++) {
-            const [element, position, movement] = list[a];
-
-            const parallaxStrength = Math.pow(Math.sin(parallaxDistances[i] * Math.PI), 2);
-
-            const additionalOffsetX = -(movement - 1) / 2 * realizedMouseOffset[0] * 960 * parallaxStrength;
-            const additionalOffsetY = -(movement - 1) / 4 * 960 * (parallaxDistances[i] - 0.5) * 2;
-            // const additionalOffsetY = -(movement - 1) / 2 / 8 * realizedMouseOffset[1] * 960;
-
-            element.style.left = (position[0] + additionalOffsetX) + 'px';
-            element.style.top = (position[1] + additionalOffsetY) + 'px';
-        }
     }
 
     window.requestAnimationFrame(animationFrame);

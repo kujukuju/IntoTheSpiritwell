@@ -54,6 +54,10 @@ html, body {
     }
 }
 
+span.italic {
+    font-style: italic;
+}
+
 p {
     line-height: 1.4;
     margin-block-start: 0.5rem;
@@ -63,8 +67,8 @@ p {
 .header {
     position: relative;
     margin-top: -0.5vw;
-    width: 110vw;
-    height: calc(1080vw / 1920 * 110);
+    width: 110vmax;
+    height: calc(1080 / 1920 * 110vmax);
 
     overflow: hidden;
 }
@@ -199,6 +203,8 @@ body .scrollArrowContainer .scrollArrow.hidden {
     margin: 0 auto;
     margin-bottom: 2rem;
 
+    padding-bottom: 2rem;
+
     box-sizing: border-box;
 
     color: #f6f0f9;
@@ -207,16 +213,26 @@ body .scrollArrowContainer .scrollArrow.hidden {
 
     font-family: Ghibli, sans-serif;
     letter-spacing: 4px;
+
+    transition: 500ms left ease;
 }
 
 .description.top {
     width: 55vw;
     min-width: 80vmin;
+
+    left: -100%;
 }
 
 .description.bottom {
     width: 50vw;
     min-width: 80vmin;
+
+    left: 100%;
+}
+
+.description.visible {
+    left: 0;
 }
 
 .subscribe {
@@ -225,6 +241,10 @@ body .scrollArrowContainer .scrollArrow.hidden {
     position: relative;
 
     background-color: #e0986c;
+}
+
+body.mobile .subscribe {
+    flex-direction: column;
 }
 
 .subscribe .arrow {
@@ -259,10 +279,23 @@ body .scrollArrowContainer .scrollArrow.hidden {
     box-sizing: border-box;
 }
 
+body.mobile .subscribe .half {
+    padding: 4rem 4rem;
+}
+
+body.mobile .subscribe .center + .half {
+    left: 140px;
+    margin-top: -12rem;
+}
+
 .subscribe .half .subscribeImage {
     position: absolute;
     top: -180px;
     left: -80px;
+}
+
+body.mobile .subscribe .half .subscribeImage {
+    left: calc(-80px + 4rem);
 }
 
 .subscribe .half .title {
@@ -301,7 +334,7 @@ body .scrollArrowContainer .scrollArrow.hidden {
     /* box-shadow: 2px 2px 5px 0px #000000; */
 }
 
-.subscribe .half .button input {
+.subscribe .half .button input[type=email] {
     /*font-size: 1rem;*/
 
     padding: 6px 8px;
@@ -315,16 +348,17 @@ body .scrollArrowContainer .scrollArrow.hidden {
     font-family: inherit;
 }
 
-.subscribe .half .button button {
+.subscribe .half .button input[type=submit] {
     /*font-size: 1rem;*/
 
     color: #000000;
     background-color: #609AE0;
 
-    padding: 6px 12px;
+    padding: calc(6px + 1rem / 2) 12px;
     border: none;
     outline: none;
     font-size: 1.5rem;
+    
     /* line-height: 2.5rem; */
 
     margin-left: 4px;
@@ -336,7 +370,7 @@ body .scrollArrowContainer .scrollArrow.hidden {
     font-family: inherit;
 }
 
-.subscribe .half .button button:hover {
+.subscribe .half .button input[type=submit]:hover {
     background-color: #4271ac;
 }
 
@@ -364,6 +398,12 @@ body .scrollArrowContainer .scrollArrow.hidden {
     padding-right: 12vw;
 }
 
+/* body.mobile .feature.reversed {
+    flex-direction: row;
+    padding-left: 12vw;
+    padding-right: 0;
+} */
+
 .feature.last {
     margin-bottom: 4.5rem;
 }
@@ -371,7 +411,7 @@ body .scrollArrowContainer .scrollArrow.hidden {
 body.mobile .feature {
     flex-direction: column-reverse;
 
-    margin: 16rem 0;
+    margin: 32rem 0;
 }
 
 .feature .parallax {
@@ -514,12 +554,25 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
     margin-left: -15vw;
 }
 
+body.mobile .feature.first .more {
+    margin-left: -12vw;
+}
+
 .feature.reversed .more {
     margin-left: 0;
     margin-right: -20vw;
 
     padding-left: 5vw;
     padding-right: 0;
+}
+
+body.mobile .feature.reversed .more {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+body.mobile .feature.last .more {
+    margin-left: -12vw;
 }
 
 .feature .more .cover {
@@ -556,6 +609,29 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
     z-index: 0;
 }
 
+body.mobile .feature .more .centered {
+    position: absolute;
+
+    top: -14rem;
+    left: 15vw;
+
+    width: 60%;
+
+    transform: none;
+}
+
+body.mobile .feature.first .more .centered {
+    top: -26rem;
+}
+
+body.mobile .feature.last .more .centered {
+    top: -10rem;
+}
+
+/* body.mobile .feature.first .more .centered {
+    top: -24rem;
+} */
+
 .feature .more .centered.visible {
     opacity: 1;
     transition-delay: 200ms;
@@ -589,6 +665,10 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
 
     font-family: Ghibli, sans-serif;
     letter-spacing: 2px;
+}
+
+body.mobile .feature .more .centered .title {
+    background-color: rgba(235, 233, 233, 0.8);
 }
 
 .feature .more .moreButton {
@@ -630,6 +710,10 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
     color: #7743E0;
 }
 
+body.mobile .feature .more .moreButton {
+    display: none;
+}
+
 .feature .more .moreInformation {
     position: absolute;
     top: 50%;
@@ -667,11 +751,31 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
     left: 15%;
 }
 
-.feature .more .moreInformation.visible {
+.feature .more .moreInformation.visible,
+body.mobile .feature .more .moreInformation {
     opacity: 1;
     transition-delay: 200ms;
 
     z-index: 20;
+}
+
+body.mobile .feature .more .moreInformation {
+    position: absolute;
+
+    top: -8rem;
+    left: 15vw;
+
+    width: calc(100% - 15vw - 10vw);
+
+    transform: none;
+}
+
+body.mobile .feature.first .more .moreInformation {
+    top: -20rem;
+}
+
+body.mobile .feature.last .more .moreInformation {
+    top: -4rem;
 }
 
 .feature .more .moreInformation .hide {
@@ -684,18 +788,18 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
 
     height: 20vw;
 
-    background-color: #0C0526;
+    background-color: #0c0b0b;
 }
 
 /* position markers */
 .marker {
     position: absolute;
 
-    width: 10px;
-    height: 10px;
+    /* width: 10px;
+    height: 10px; */
 
-    background-color: #ff00aa;
-    z-index: 1000;
+    /* background-color: #ff00aa; */
+    /* z-index: 1000; */
 }
 
 .bottomInfo .offset {
