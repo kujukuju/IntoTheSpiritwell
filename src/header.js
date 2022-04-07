@@ -213,7 +213,7 @@ const subscribe = () => {
         console.error('Error subscribing.', request.responseText);
         openSubscribeExternalPage();
     };
-    request.open('POST', 'https://server.intothespiritwell.com/subscribe', true);
+    request.open('POST', 'https://server.intothespiritwell.com:4430/subscribe', true);
     request.setRequestHeader('Content-Type', 'application/json');
     request.send(JSON.stringify({email: email}));
 };
