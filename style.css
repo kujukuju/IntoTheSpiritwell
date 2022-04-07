@@ -135,6 +135,8 @@ body.loaded .header .title {
     transition: 100ms opacity ease;
 
     cursor: pointer;
+
+    z-index: 10000;
 }
 
 .scrollArrowContainer:hover {
