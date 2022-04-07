@@ -167,7 +167,6 @@ const validateEmail = (email) => {
 
 const openSubscribeExternalPage = () => {
     window.location = 'https://mailchi.mp/8d6a81268f39/stay-updated';
-    console.log('open external');
 };
 
 const subscribeThankYou = () => {
