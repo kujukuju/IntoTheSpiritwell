@@ -1,0 +1,857 @@
+html, body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    overflow-x: hidden;
+
+    scroll-behavior: smooth;
+
+    background-color: #ebe9e9;
+
+    font-family: Ghibli, sans-serif;
+}
+
+@media screen and (min-width: 320px) {
+    body, input, button {
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 448px) {
+    body, input, button {
+        font-size: 36px;
+    }
+}
+
+@media screen and (min-width: 512px) {
+    body, input, button {
+        font-size: 32px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    body, input, button {
+        font-size: 28px;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    body, input, button {
+        font-size: 24px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    body, input, button {
+        font-size: 20px;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    body, input, button {
+        font-size: 16px;
+    }
+}
+
+p {
+    line-height: 1.4;
+    margin-block-start: 0.5rem;
+    margin-block-end: 0.5rem;
+}
+
+.header {
+    position: relative;
+    margin-top: -0.5vw;
+    width: 110vw;
+    height: calc(1080vw / 1920 * 110);
+
+    overflow: hidden;
+}
+
+.header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+}
+
+.header .title {
+    position: absolute;
+    top: 50vmin;
+    left: 50vw;
+
+    font-size: calc(3rem + 24px);
+    transform: translateX(-50%) translateY(-50%);
+
+    color: #ffffff;
+    letter-spacing: 4px;
+
+    text-align: center;
+
+    opacity: 0;
+
+    font-family: GhibliBold, sans-serif;
+
+    transition: opacity 2s ease-in;
+
+    white-space: nowrap;
+}
+
+body.mobile .header .title {
+    top: 35vmin;
+}
+
+.header .title .large {
+    font-size: calc(4rem + 36px);
+}
+
+.header .title .small {
+    font-size: calc(2rem + 12px);
+}
+
+body.loaded .header .title {
+    transition-delay: 250ms;
+    opacity: 100%;
+}
+
+.scrollArrowContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    animation: 6000ms arrowFrames 2750ms infinite ease-in-out;
+
+    opacity: 1;
+    transition: 100ms opacity ease;
+
+    cursor: pointer;
+}
+
+.scrollArrowContainer:hover {
+    opacity: 0.5;
+}
+
+@keyframes arrowFrames {
+    0% {
+        top: 0;
+    }
+
+    8% {
+        top: 32px;
+    }
+
+    16% {
+        top: 0;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+.scrollArrowContainer .scrollArrow {
+    position: absolute;
+    top: 80vh;
+    left: 50%;
+
+    width: calc(360 / 191 * 4rem);
+    height: 4rem;
+
+    transform-origin: center;
+    transform: translateX(-50%) translateY(-35.355339059%);
+
+    opacity: 0;
+
+    transition: opacity 1000ms ease;
+}
+
+body.loaded .scrollArrowContainer .scrollArrow {
+    transition-delay: 1750ms;
+    opacity: 1;
+}
+
+body .scrollArrowContainer .scrollArrow.hidden {
+    transition: opacity 250ms ease;
+    transition-delay: 0ms;
+
+    opacity: 0;
+}
+
+.descriptionBackground {
+    position: relative;
+    margin-top: -1px;
+    background-color: #040404;
+    padding: 4rem 0 8rem 0;
+}
+
+.description {
+    position: relative;
+
+    font-size: 1.8rem;
+    text-align: center;
+
+    width: 50vw;
+    min-width: 80vmin;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+
+    box-sizing: border-box;
+
+    color: #f6f0f9;
+
+    z-index: 10;
+
+    font-family: Ghibli, sans-serif;
+    letter-spacing: 4px;
+}
+
+.description.top {
+    width: 55vw;
+    min-width: 80vmin;
+}
+
+.description.bottom {
+    width: 50vw;
+    min-width: 80vmin;
+}
+
+.subscribe {
+    display: flex;
+
+    position: relative;
+
+    background-color: #e0986c;
+}
+
+.subscribe .arrow {
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    /* background-color: #040404; */
+    width: calc(359 / 180 * 6rem);
+    height: 6rem;
+
+    transform-origin: center;
+    transform: translateX(-50%) translateY(-20%);
+}
+
+.subscribe .padding {
+    width: 16rem;
+    max-width: 14vw;
+
+    flex-shrink: 0;
+}
+
+.subscribe .half {
+    position: relative;
+
+    color: #000000;
+
+    flex-grow: 1;
+    flex-basis: 0;
+
+    padding: 4rem 0;
+    box-sizing: border-box;
+}
+
+.subscribe .half .subscribeImage {
+    position: absolute;
+    top: -180px;
+    left: -80px;
+}
+
+.subscribe .half .title {
+    font-size: 2.5rem;
+
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+
+    font-family: GhibliBold, sans-serif;
+}
+
+.subscribe .half .text {
+    font-size: 2rem;
+
+    margin-bottom: 0rem;
+}
+
+.subscribe .half .button {
+    position: relative;
+    top: -100px;
+    left: 140px;
+
+    display: flex;
+
+    margin-top: 12rem;
+
+    white-space: nowrap;
+
+    z-index: 10;
+
+    /* border: 1px solid #000000; */
+    padding: 2px;
+
+    background-color: #e0986c;
+
+    /* box-shadow: 2px 2px 5px 0px #000000; */
+}
+
+.subscribe .half .button input {
+    /*font-size: 1rem;*/
+
+    padding: 6px 8px;
+    border: none;
+    outline: none;
+
+    width: 50%;
+    font-size: 2.5rem;
+    /* line-height: 2.5rem; */
+
+    font-family: inherit;
+}
+
+.subscribe .half .button button {
+    /*font-size: 1rem;*/
+
+    color: #000000;
+    background-color: #609AE0;
+
+    padding: 6px 12px;
+    border: none;
+    outline: none;
+    font-size: 1.5rem;
+    /* line-height: 2.5rem; */
+
+    margin-left: 4px;
+
+    cursor: pointer;
+
+    transition: opacity 100ms ease;
+
+    font-family: inherit;
+}
+
+.subscribe .half .button button:hover {
+    background-color: #4271ac;
+}
+
+.subscribe .center {
+    flex-grow: 0;
+    width: 16rem;
+    max-width: 14vw;
+}
+
+.feature {
+    display: flex;
+
+    width: 100%;
+    padding-left: 12vw;
+    padding-right: 0;
+
+    box-sizing: border-box;
+
+    margin: 8rem 0;
+}
+
+.feature.reversed {
+    flex-direction: row-reverse;
+    padding-left: 0;
+    padding-right: 12vw;
+}
+
+.feature.last {
+    margin-bottom: 4.5rem;
+}
+
+body.mobile .feature {
+    flex-direction: column-reverse;
+
+    margin: 16rem 0;
+}
+
+.feature .parallax {
+    position: relative;
+
+    /* width: 60%; */
+
+    height: 32vw;
+}
+
+.feature .parallax.static {
+    position: static;
+
+    overflow: hidden;
+    
+    width: 75%;
+}
+
+.feature .parallax img {
+    position: relative;
+    z-index: 1;
+}
+
+.feature .parallax img.image1 {
+    position: relative;
+    top: -5vw;
+    left: -6vw;
+
+    width: 65.1041667vw;
+    /* max-width: 1250px; */
+    height: auto;
+    /* height: 800px;
+    width: auto; */
+}
+
+body.mobile .feature .parallax img.image1 {
+    left: -10vw;
+    width: 94vw;
+}
+
+.feature .parallax img.image2 {
+    position: relative;
+    top: -5vw;
+    right: -8vw;
+
+    width: 62.5vw;
+    /* max-width: 1200px; */
+    height: auto;
+    /* height: 1200px;
+    width: auto; */
+}
+
+body.mobile .feature .parallax img.image2 {
+    right: -4vw;
+    
+    width: 94vw;
+}
+
+.feature .parallax img.image3boss {
+    position: absolute;
+    top: -1296px;
+    left: -938px;
+
+    /* width: 130.208333vw;
+    height: auto; */
+    
+    /* height: 2160px;
+    width: auto; */
+
+    z-index: 50;
+}
+
+.feature .parallax img.dynamic {
+    position: absolute;
+
+    width: 2500px;
+    height: auto;
+}
+
+.feature .parallax img.dynamic.vineHoldingKodama1 {
+    width: 1102px;
+}
+
+.feature .parallax img.dynamic.vineHoldingKodama2 {
+    width: 495px;
+}
+
+.feature .parallax img.dynamic.vineFire {
+    width: 1338px;
+}
+
+.feature .parallax img.dynamic.vineWrapped1 {
+    width: 765px;
+}
+
+.feature .parallax img.dynamic.vineWrapped2 {
+    width: 180px;
+}
+
+.feature .parallax img.dynamic.vineVerticalRight {
+    width: 549px;
+}
+
+.feature .parallax img.dynamic.vineVerticalLeft {
+    width: 167px;
+}
+
+.feature .parallax img.dynamic.vineWall {
+    width: 667px;
+}
+
+body.mobile .feature .parallax img.dynamic.vineVerticalRight {
+    display: none;
+}
+
+body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
+    display: none;
+}
+
+.feature .more {
+    position: relative;
+
+    flex-grow: 1;
+
+    /* padding: 0 2vmin; */
+
+    box-sizing: border-box;
+    margin-left: -20vw;
+    margin-right: 0;
+
+    padding-left: 0;
+    padding-right: 5vw;
+
+    /* min-width: 40%; */
+
+    z-index: 100;
+}
+
+.feature.first .more {
+    margin-left: -15vw;
+}
+
+.feature.reversed .more {
+    margin-left: 0;
+    margin-right: -20vw;
+
+    padding-left: 5vw;
+    padding-right: 0;
+}
+
+.feature .more .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 10;
+}
+
+.feature .more .centered {
+    position: relative;
+    top: 50%;
+    left: 10%;
+
+    display: inline-block;
+
+    opacity: 0;
+
+    transform: translateY(-50%);
+
+    transition: opacity 250ms ease;
+    transition-delay: 0ms;
+
+    /* padding: 8px; */
+
+    /* background-color: rgba(235, 233, 233, 1); */
+    /* border-radius: 8px; */
+    /* filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.5)); */
+
+    z-index: 0;
+}
+
+.feature .more .centered.visible {
+    opacity: 1;
+    transition-delay: 200ms;
+
+    z-index: 20;
+}
+
+.feature .more .centered .title {
+    display: inline;
+
+    font-size: 2.5rem;
+    line-height: 1.2;
+
+    /* margin-bottom: 20px; */
+    padding-bottom: 8px;
+
+    background-color: #ebe9e9;
+
+    /* background-color: #e0986c; */
+    border-radius: 4px;
+
+    /* background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 8px 0 0 0 rgba(255, 255, 255, 0.75), -8px 0 0 0 rgba(255, 255, 255, 0.75); */
+    /* background-color: rgba(224, 152, 108, 0.75);
+    box-shadow: 8px 0 0 0 rgba(224, 152, 108, 0.75), -8px 0 0 0 rgba(224, 152, 108, 0.75); */
+
+    /* text-shadow: 1px 0 #ffffff, 0 1px #ffffff, -1px 0 #ffffff, 0 -1px #ffffff; */
+    /* text-shadow: 1px 1px #ebe9e9, 2px 2px #ebe9e9; */
+
+    /* filter: drop-shadow(0px 0px 1px rgba(235, 233, 233, 0.5)); */
+
+    font-family: Ghibli, sans-serif;
+    letter-spacing: 2px;
+}
+
+.feature .more .moreButton {
+    display: inline-block;
+
+    font-size: 1.75rem;
+    line-height: 1.2;
+
+    font-family: GhibliBold, sans-serif;
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    color: #0C0526;
+
+    margin-top: 7px;
+    padding-bottom: 8px;
+    padding-top: 8px;
+
+    background-color: #ebe9e9;
+
+    /* background-color: #e0986c; */
+    border-radius: 4px;
+
+    /* background-color: rgba(255, 255, 255, 0.75);
+    box-shadow: 8px 0 0 0 rgba(255, 255, 255, 0.75), -8px 0 0 0 rgba(255, 255, 255, 0.75); */
+    /* background-color: rgba(224, 152, 108, 0.75);
+    box-shadow: 8px 0 0 0 rgba(224, 152, 108, 0.75), -8px 0 0 0 rgba(224, 152, 108, 0.75); */
+
+    /* text-shadow: 1px 0 #ffffff, 0 1px #ffffff, -1px 0 #ffffff, 0 -1px #ffffff; */
+    /* text-shadow: 1px 1px #ebe9e9, 2px 2px #ebe9e9; */
+
+    /* filter: drop-shadow(0px 0px 1px rgba(235, 233, 233, 0.5)); */
+
+    transition: color 100ms ease;
+}
+
+.feature .more .moreButton:hover {
+    color: #7743E0;
+}
+
+.feature .more .moreInformation {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+
+    /* width: 60%; */
+
+    display: inline-block;
+    opacity: 0;
+
+    font-size: 1.5rem;
+    font-family: Ghibli, sans-serif;
+    letter-spacing: 2px;
+
+    /* text-shadow: 2px 2px rgba(255, 255, 255, 0.75); */
+
+    transform: translateY(-50%);
+
+    transition: opacity 250ms ease;
+    transition-delay: 0ms;
+
+    width: 80%;
+
+    z-index: 0;
+}
+
+.feature .more .moreInformation p {
+    display: inline-block;
+
+    background-color: rgba(235, 233, 233, 0.8);
+    border-radius: 4px;
+}
+
+.feature.reversed .more .moreInformation {
+    left: 15%;
+}
+
+.feature .more .moreInformation.visible {
+    opacity: 1;
+    transition-delay: 200ms;
+
+    z-index: 20;
+}
+
+.feature .more .moreInformation .hide {
+    margin-top: 1rem;
+    background-color: rgba(235, 233, 233, 0.8);
+}
+
+.bottomInfo {
+    position: relative;
+
+    height: 20vw;
+
+    background-color: #0C0526;
+}
+
+/* position markers */
+.marker {
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    background-color: #ff00aa;
+    z-index: 1000;
+}
+
+.bottomInfo .offset {
+    left: 50%;
+}
+
+body.mobile .bottomInfo .offset {
+    left: 52.5%;
+}
+
+.bottomInfo .kodamaVineStart {
+    left: 23vw;
+    top: -28vw;
+}
+
+body.mobile .bottomInfo .kodamaVineStart {
+    left: 29vw;
+    top: -31vw;
+}
+
+.bottomInfo .fireVineStart {
+    left: 28vw;
+    top: -33vw;
+}
+
+body.mobile .bottomInfo .fireVineStart {
+    left: 21vw;
+    top: -39vw;
+}
+
+.bottomInfo .wrappedVineStart {
+    left: 17vw;
+    top: -32vw;
+}
+
+body.mobile .bottomInfo .wrappedVineStart {
+    left: 14vw;
+    top: -43vw;
+}
+
+.bottomInfo .verticalVineRightStart {
+    left: 22vw;
+    top: -43vw;
+}
+
+.bottomInfo .verticalVineLeftStart {
+    left: 13vw;
+    top: -40vw;
+}
+
+.bottomInfo .wallVineStart {
+    left: 5vw;
+    top: -45vw;
+}
+
+body.mobile .bottomInfo .wallVineStart {
+    left: 8vw;
+    top: -38vw;
+}
+
+.bottomInfo .wallVineEnd {
+    left: -10vw;
+    top: -85vw;
+}
+
+body.mobile .bottomInfo .wallVineEnd {
+    left: -15vw;
+    top: -110vw;
+}
+
+.feature .parallax .kodamaVineEnd {
+    left: calc(-5vw + 72vw);
+    top: calc(-6vw + 34.2vw);
+}
+
+body.mobile .feature .parallax .kodamaVineEnd {
+    left: calc(-5vw + 96.6vw);
+    top: calc(-6vw + 50.8vw);
+}
+
+.feature .parallax .kodamaVineP2 {
+    left: calc(-5vw + 54vw);
+    top: calc(-6vw + 52.2vw);
+}
+
+body.mobile .feature .parallax .kodamaVineP2 {
+    left: calc(-5vw + 73vw);
+    top: calc(-6vw + 75.2vw);
+}
+
+.feature .parallax .kodamaVineP1 {
+    left: calc(-5vw + 36.5vw);
+    top: calc(-6vw + 54.5vw);
+}
+
+body.mobile .feature .parallax .kodamaVineP1 {
+    left: calc(-5vw + 66.5vw);
+    top: calc(-6vw + 76.5vw);
+}
+
+.feature .parallax .fireVineEnd {
+    left: calc(-5vw + 50vw);
+    top: calc(-6vw + 33.3vw);
+}
+
+body.mobile .feature .parallax .fireVineEnd {
+    left: calc(-5vw + 63vw);
+    top: calc(-6vw + 49.3vw);
+}
+
+.feature .parallax .wrappedVineEnd {
+    left: calc(-5vw + 29vw);
+    top: calc(-6vw + 31vw);
+}
+
+body.mobile .feature .parallax .wrappedVineEnd {
+    left: calc(-5vw + 34vw);
+    top: calc(-6vw + 45vw);
+}
+
+.feature .parallax .wrappedVineP2 {
+    left: calc(-5vw + 24vw);
+    top: calc(-6vw + 31vw);
+}
+
+body.mobile .feature .parallax .wrappedVineP2 {
+    left: calc(-5vw + 26vw);
+    top: calc(-6vw + 45vw);
+}
+
+.feature .parallax .wrappedVineP1 {
+    left: calc(-5vw + 28vw);
+    top: calc(-6vw + 28vw);
+}
+
+body.mobile .feature .parallax .wrappedVineP1 {
+    left: calc(-5vw + 36vw);
+    top: calc(-6vw + 27vw);
+}
+
+.feature .parallax .verticalVineRightEnd {
+    left: calc(-100px + 27.5vw);
+    top: calc(-100px + 30.5vw);
+}
+
+.feature .parallax .verticalVineLeftEnd {
+    left: calc(-100px + 9.5vw);
+    top: calc(-100px + 36.5vw);
+}
+
+@font-face {
+    font-family: Ghibli;
+    src: url(Ghibli.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: GhibliBold;
+    src: url(Ghibli_Bold.ttf) format('truetype');
+}
