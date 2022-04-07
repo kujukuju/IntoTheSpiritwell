@@ -360,13 +360,13 @@ const adjustBossImages = () => {
     const kodamaVineEnd = getElementPosition('kodama-vine-end');
     const kodamaVine1 = document.getElementById('kodama-vine-1');
     const kodamaVine2 = document.getElementById('kodama-vine-2');
-    positionImage(kodamaVine1, {x: 344, y: 164}, kodamaVineStart, {x: 1094, y: 234}, kodamaVineP1);
+    positionImage(kodamaVine1, {x: 20, y: 100}, kodamaVineStart, {x: 760, y: 170}, kodamaVineP1);
     positionImage(kodamaVine2, {x: 60, y: 464}, kodamaVineP2, {x: 430, y: 94}, kodamaVineEnd);
 
     const fireVineStart = getElementPosition('fire-vine-start');
     const fireVineEnd = getElementPosition('fire-vine-end');
     const fireVine = document.getElementById('fire-vine');
-    positionImage(fireVine, {x: 388, y: 278}, fireVineStart, {x: 1322, y: 20}, fireVineEnd);
+    positionImage(fireVine, {x: 35, y: 328}, fireVineStart, {x: 1322, y: 20}, fireVineEnd);
 
     const wrappedVineStart = getElementPosition('wrapped-vine-start');
     const wrappedVineP1 = getElementPosition('wrapped-vine-p1');
@@ -393,9 +393,13 @@ const adjustBossImages = () => {
     positionImage(wallVine, {x: 650, y: 1130}, wallVineStart, {x: 14, y: 16}, wallVineEnd);
 };
 
-const positionImage = (element, anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale) => {
+const positionImage = (element, anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale, debug) => {
     if (uniformScale === undefined) {
         uniformScale = true;
+    }
+
+    if (debug) {
+        console.log()
     }
 
     let scaleX;

@@ -13,43 +13,43 @@ html, body {
 }
 
 @media screen and (min-width: 320px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 40px;
     }
 }
 
 @media screen and (min-width: 448px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 36px;
     }
 }
 
 @media screen and (min-width: 512px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 32px;
     }
 }
 
 @media screen and (min-width: 768px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 28px;
     }
 }
 
 @media screen and (min-width: 1024px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 24px;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 20px;
     }
 }
 
 @media screen and (min-width: 1600px) {
-    body, input, button {
+    html, body, input, button {
         font-size: 16px;
     }
 }
@@ -284,11 +284,11 @@ body.mobile .subscribe {
 }
 
 body.mobile .subscribe .half {
-    padding: 4rem 4rem;
+    padding: 4rem 15vw;
 }
 
 body.mobile .subscribe .center + .half {
-    left: 140px;
+    left: 0;
     margin-top: -12rem;
 }
 
@@ -336,6 +336,10 @@ body.mobile .subscribe .half .subscribeImage {
     background-color: #e0986c;
 
     /* box-shadow: 2px 2px 5px 0px #000000; */
+}
+
+body.mobile .subscribe .half .button {
+    left: 0;
 }
 
 .subscribe .half .button input {
@@ -393,6 +397,8 @@ body.mobile .subscribe .half .subscribeImage {
     /* line-height: 2.5rem; */
 
     font-family: inherit;
+
+    flex-grow: 1;
 
     transition: 500ms opacity ease;
 }
@@ -541,7 +547,7 @@ body.mobile .feature .parallax img.image2 {
 }
 
 .feature .parallax img.dynamic.vineHoldingKodama1 {
-    width: 1102px;
+    width: 768px;
 }
 
 .feature .parallax img.dynamic.vineHoldingKodama2 {
@@ -561,15 +567,23 @@ body.mobile .feature .parallax img.image2 {
 }
 
 .feature .parallax img.dynamic.vineVerticalRight {
-    width: 549px;
+    width: 554px;
 }
 
 .feature .parallax img.dynamic.vineVerticalLeft {
-    width: 167px;
+    width: 171px;
 }
 
 .feature .parallax img.dynamic.vineWall {
     width: 667px;
+}
+
+body.mobile .feature .parallax img.dynamic.vineFire {
+    z-index: 0;
+}
+
+body.mobile .feature .parallax img.dynamic.vineWrapped1 {
+    display: none;
 }
 
 body.mobile .feature .parallax img.dynamic.vineVerticalRight {
@@ -664,7 +678,7 @@ body.mobile .feature .more .centered {
     top: -14rem;
     left: 15vw;
 
-    width: 60%;
+    width: calc(100% - 15vw - 5vw);
 
     transform: none;
 }
@@ -945,8 +959,8 @@ body.mobile .feature .parallax .kodamaVineP2 {
 }
 
 body.mobile .feature .parallax .kodamaVineP1 {
-    left: calc(-5vw + 66.5vw);
-    top: calc(-6vw + 76.5vw);
+    left: calc(-5vw + 65.5vw);
+    top: calc(-6vw + 96.5vw);
 }
 
 .feature .parallax .fireVineEnd {
@@ -955,8 +969,8 @@ body.mobile .feature .parallax .kodamaVineP1 {
 }
 
 body.mobile .feature .parallax .fireVineEnd {
-    left: calc(-5vw + 63vw);
-    top: calc(-6vw + 49.3vw);
+    left: calc(-5vw + 32vw);
+    top: calc(-6vw + 56.3vw);
 }
 
 .feature .parallax .wrappedVineEnd {
