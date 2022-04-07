@@ -119,6 +119,16 @@ window.addEventListener('load', () => {
     topDescriptionElement = document.getElementById('description-top');
     bottomDescriptionElement = document.getElementById('description-bottom');
 
+    document.getElementById('mc-embedded-subscribe').addEventListener('click', event => {
+        subscribe();
+    });
+    document.getElementById('mce-EMAIL').addEventListener('keypress', event => {
+        var keyCode = event.code || event.key;
+        if (keyCode == 'Enter') {
+            subscribe();
+        }
+    });
+
     scrollCallback();
     adjustBossImages();
 
@@ -149,6 +159,64 @@ const initializeScrollButton = (arrow, description) => {
         const bounding = description.getBoundingClientRect();
         window.scrollTo(0, window.scrollY + bounding.top);
     });
+};
+
+const validateEmail = (email) => {
+    return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+};
+
+const openSubscribeExternalPage = () => {
+    window.location = 'https://mailchi.mp/8d6a81268f39/stay-updated';
+    console.log('open external');
+};
+
+const subscribeThankYou = () => {
+    document.getElementById('subscribe-area').classList.add('thanks');
+    setTimeout(() => {
+        document.getElementById('subscribe-area').classList.remove('thanks');
+        document.getElementById('mce-EMAIL').value = '';
+    }, 4000);
+};
+
+const errorSubscribeBox = () => {
+
+};
+
+const subscribe = () => {
+    const input = document.getElementById('mce-EMAIL');
+    const email = input.value || '';
+
+    if (!validateEmail(email)) {
+        errorSubscribeBox();
+
+        return;
+    }
+
+    if (document.getElementById('kinda-email').value) {
+        subscribeThankYou();
+
+        return;
+    }
+
+    const request = new XMLHttpRequest();
+    request.onload = () => {
+        if (request.status !== 200) {
+            console.error('Unknown issue subscribing.', request.status, request.responseText);
+            openSubscribeExternalPage();
+
+            return;
+        }
+
+        // say thank you
+        subscribeThankYou();
+    };
+    request.onerror = () => {
+        console.error('Error subscribing.', request.responseText);
+        openSubscribeExternalPage();
+    };
+    request.open('POST', 'https://server.intothespiritwell.com/subscribe', true);
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.send(JSON.stringify({email: email}));
 };
 
 const mouseMoveCallback = (x, y) => {
