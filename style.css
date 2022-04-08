@@ -64,6 +64,122 @@ p {
     margin-block-end: 0.5rem;
 }
 
+.mobileRotate {
+    display: none;
+
+    position: absolute;
+    top: 6vmin;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 10001;
+}
+
+body.mobile .mobileRotate {
+    display: block;
+}
+
+body.mobile .mobileRotate .phone {
+    height: 100px;
+    width: 50px;
+
+    border: 3px solid white;
+    border-radius: 10px;
+
+    animation: rotate3d 800ms ease-in-out infinite alternate;
+    transform-style: preserve-3d;
+
+    background-color: rgba(255, 255, 255, 0.5);
+
+    opacity: 0;
+
+    transition: 500ms opacity ease;
+}
+
+.mobileRotate .leftArrow {
+    opacity: 0;
+}
+
+body.mobile .mobileRotate .leftArrow {
+    position: absolute;
+    top: 50%;
+    right: -50%;
+
+    width: 24px;
+    height: 24px;
+    border-right: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+
+    transform-origin: center;
+    transform: translateX(50%) translateY(-50%) rotate(45deg);
+    
+    transition: 500ms opacity ease;
+
+    animation: shiftleft3d 800ms ease-in-out infinite alternate;
+}
+
+.mobileRotate .rightArrow {
+    opacity: 0;
+}
+
+body.mobile .mobileRotate .rightArrow {
+    position: absolute;
+    top: 50%;
+    left: -50%;
+
+    width: 24px;
+    height: 24px;
+    border-left: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+
+    transform-origin: center;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+
+    transition: 500ms opacity ease;
+
+    animation: shiftright3d 800ms ease-in-out infinite alternate;
+}
+
+body.loaded .mobileRotate.visible .phone {
+    opacity: 1;
+}
+
+body.loaded .mobileRotate.visible .leftArrow {
+    opacity: 1;
+}
+
+body.loaded .mobileRotate.visible .rightArrow {
+    opacity: 1;
+}
+
+@keyframes rotate3d {
+    0% {
+        transform: rotate3d(0, 1, 0, -45deg) translateZ(50px);
+    }
+    100% {
+        transform: rotate3d(0, 1, 0, 45deg) translateZ(50px);
+    }
+}
+
+@keyframes shiftleft3d {
+    0% {
+        transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(200%) translateY(-50%) rotate(45deg);
+    }
+}
+
+@keyframes shiftright3d {
+    0% {
+        transform: translateX(-200%) translateY(-50%) rotate(45deg)
+    }
+    100% {
+        transform: translateX(50%) translateY(-50%) rotate(45deg)
+    }
+}
+
 .header {
     position: relative;
     margin-top: -0.5vw;

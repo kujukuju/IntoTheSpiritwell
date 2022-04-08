@@ -50,6 +50,8 @@ let scrollTargetElement = null;
 let descriptionElement = null;
 let topDescriptionElement = null;
 let bottomDescriptionElement = null;
+let mobileRotate = null;
+let showedMobileControls = false;
 
 let lastRenderTime = 0;
 const realizedMouseOffset = [0, 0];
@@ -122,6 +124,7 @@ window.addEventListener('load', () => {
     descriptionElement = document.getElementById('description');
     topDescriptionElement = document.getElementById('description-top');
     bottomDescriptionElement = document.getElementById('description-bottom');
+    mobileRotate = document.getElementById('mobile-rotate');
 
     document.getElementById('mc-embedded-subscribe').addEventListener('click', event => {
         subscribe();
@@ -228,16 +231,10 @@ const mouseMoveCallback = (x, y) => {
 };
 
 const scrollCallback = () => {
-    if (descriptionElement) {
-        const descriptionBottom = descriptionElement.getBoundingClientRect().bottom;
-        if (descriptionBottom <= window.innerHeight) {
-            scrollArrowElement.classList.add('hidden');
-        }
-    }
-
     if (topDescriptionElement) {
         const topDescriptionBottom = topDescriptionElement.getBoundingClientRect().bottom;
         if (topDescriptionBottom <= window.innerHeight * 0.85) {
+            scrollArrowElement.classList.add('hidden');
             topDescriptionElement.classList.add('visible');
         }
     }
@@ -275,7 +272,10 @@ window.addEventListener('mousemove', event => {
         return;
     }
 
-    playingDefaultAnimation = false;
+    if (playingDefaultAnimation) {
+        playingDefaultAnimation = false;
+        showMobileControls();
+    }
 
     const x = ((event.clientX || 0) / window.innerWidth - 0.5) * 2;
     const y = ((event.clientY || 0) / window.innerHeight - 0.5) * 2;
@@ -286,6 +286,17 @@ window.addEventListener('mousemove', event => {
 window.addEventListener('resize', event => {
     adjustBossImages();
 });
+
+const showMobileControls = () => {
+    if (!showedMobileControls) {
+        showedMobileControls = true;
+
+        mobileRotate.classList.add('visible');
+        setTimeout(() => {
+            mobileRotate.classList.remove('visible');
+        }, 4300);
+    }
+};
 
 const loaded = () => {
     document.body.className = 'loaded';
@@ -318,6 +329,9 @@ const animationFrame = () => {
         realizedMouseOffset[0] = -Math.cos(progress * Math.PI);
         realizedMouseOffset[1] = -Math.cos(progress * Math.PI);
 
+        if (progress >= 0.65) {
+            showMobileControls();
+        }
         if (progress >= 1) {
             playingDefaultAnimation = false;
         }
