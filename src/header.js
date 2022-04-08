@@ -59,15 +59,15 @@ let playingDefaultAnimation = true;
 let defaultAnimationStartTime = 0;
 
 window.addEventListener('load', () => {
-    headers[0] = document.getElementById('layer1');
-    headers[1] = document.getElementById('layer2');
-    headers[2] = document.getElementById('layer3');
-    headers[3] = document.getElementById('layer4');
-    headers[4] = document.getElementById('layer5');
-    headers[5] = document.getElementById('layer6');
-    headers[6] = document.getElementById('layer7');
-    headers[7] = document.getElementById('layer8');
-    headers[8] = document.getElementById('layer9');
+    headers[0] = [document.getElementById('layer1-img')];
+    headers[1] = [document.getElementById('layer2-img'), document.getElementById('layer2-webp')];
+    headers[2] = [document.getElementById('layer3-img'), document.getElementById('layer3-webp')];
+    headers[3] = [document.getElementById('layer4-img'), document.getElementById('layer4-webp')];
+    headers[4] = [document.getElementById('layer5-img'), document.getElementById('layer5-webp')];
+    headers[5] = [document.getElementById('layer6-img'), document.getElementById('layer6-webp')];
+    headers[6] = [document.getElementById('layer7-img'), document.getElementById('layer7-webp')];
+    headers[7] = [document.getElementById('layer8-img'), document.getElementById('layer8-webp')];
+    headers[8] = [document.getElementById('layer9-img'), document.getElementById('layer9-webp')];
 
     let count = 0;
     for (let i = 0; i < headers.length; i++) {
@@ -79,12 +79,16 @@ window.addEventListener('load', () => {
             }
         };
 
-        if (headers[i].complete) {
+        if (headers[i][0].complete || (headers[i][1] && headers[i][1].complete)) {
             loadCallback();
         } else {
-            headers[i].addEventListener('load', loadCallback);
-            headers[i].addEventListener('error', event => {
-                console.error('Error loading image. ', headers[i].src);
+            headers[i][0].addEventListener('load', loadCallback);
+            headers[i][0].addEventListener('error', event => {
+                console.error('Error loading image. ', headers[i][0].src);
+            });
+            headers[i][1] && headers[i][1].addEventListener('load', loadCallback);
+            headers[i][1] && headers[i][1].addEventListener('error', event => {
+                console.error('Error loading image. ', headers[i][1].src);
             });
         }
     }
@@ -335,8 +339,12 @@ const animationFrame = () => {
 
         const additionalOffsetY = -(verticalMovement[i] - 1) / 2 * (1 - realizedMouseOffset[1]);
 
-        headers[i].style.left = (offset * 100 + headerOffsetX * 100) + 'vw';
-        headers[i].style.top = (additionalOffsetY * 100) + 'vw';
+        headers[i][0].style.left = (offset * 100 + headerOffsetX * 100) + 'vw';
+        headers[i][0].style.top = (additionalOffsetY * 100) + 'vw';
+        if (headers[i][1]) {
+            headers[i][1].style.left = (offset * 100 + headerOffsetX * 100) + 'vw';
+            headers[i][1].style.top = (additionalOffsetY * 100) + 'vw';
+        }
     }
 
     window.requestAnimationFrame(animationFrame);
@@ -351,55 +359,60 @@ const adjustBossImages = () => {
 
     const bottomPosition = getElementPosition('bottom');
     const bottomOffsetPosition = getElementPosition('bottom-offset');
-    const bossPlantImage = document.getElementById('boss-image');
-    positionImage(bossPlantImage, {x: 682, y: 1970}, bottomPosition, {x: 1648, y: 1970}, bottomOffsetPosition);
+    const bossPlantImages = [document.getElementById('boss-image-img'), document.getElementById('boss-image-webp')];
+    positionImages(bossPlantImages, {x: 682, y: 1970}, bottomPosition, {x: 1648, y: 1970}, bottomOffsetPosition);
 
     const kodamaVineStart = getElementPosition('kodama-vine-start');
     const kodamaVineP1 = getElementPosition('kodama-vine-p1');
     const kodamaVineP2 = getElementPosition('kodama-vine-p2');
     const kodamaVineEnd = getElementPosition('kodama-vine-end');
-    const kodamaVine1 = document.getElementById('kodama-vine-1');
-    const kodamaVine2 = document.getElementById('kodama-vine-2');
-    positionImage(kodamaVine1, {x: 20, y: 100}, kodamaVineStart, {x: 760, y: 170}, kodamaVineP1);
-    positionImage(kodamaVine2, {x: 60, y: 464}, kodamaVineP2, {x: 430, y: 94}, kodamaVineEnd);
+    const kodamaVine1 = [document.getElementById('kodama-vine-1-img'), document.getElementById('kodama-vine-1-webp')];
+    const kodamaVine2 = [document.getElementById('kodama-vine-2-img'), document.getElementById('kodama-vine-2-webp')];
+    positionImages(kodamaVine1, {x: 20, y: 100}, kodamaVineStart, {x: 760, y: 170}, kodamaVineP1);
+    positionImages(kodamaVine2, {x: 60, y: 464}, kodamaVineP2, {x: 430, y: 94}, kodamaVineEnd);
 
     const fireVineStart = getElementPosition('fire-vine-start');
     const fireVineEnd = getElementPosition('fire-vine-end');
-    const fireVine = document.getElementById('fire-vine');
-    positionImage(fireVine, {x: 35, y: 328}, fireVineStart, {x: 1322, y: 20}, fireVineEnd);
+    const fireVine = [document.getElementById('fire-vine-img'), document.getElementById('fire-vine-webp')];
+    positionImages(fireVine, {x: 35, y: 328}, fireVineStart, {x: 1322, y: 20}, fireVineEnd);
 
     const wrappedVineStart = getElementPosition('wrapped-vine-start');
     const wrappedVineP1 = getElementPosition('wrapped-vine-p1');
     const wrappedVineP2 = getElementPosition('wrapped-vine-p2');
     const wrappedVineEnd = getElementPosition('wrapped-vine-end');
-    const wrappedVine1 = document.getElementById('wrapped-vine-1');
-    const wrappedVine2 = document.getElementById('wrapped-vine-2');
-    positionImage(wrappedVine1, {x: 18, y: 416}, wrappedVineStart, {x: 765, y: 0}, wrappedVineP1);
-    positionImage(wrappedVine2, {x: 60, y: 50}, wrappedVineP2, {x: 162, y: 50}, wrappedVineEnd);
+    const wrappedVine1 = [document.getElementById('wrapped-vine-1-img'), document.getElementById('wrapped-vine-1-webp')];
+    const wrappedVine2 = [document.getElementById('wrapped-vine-2-img'), document.getElementById('wrapped-vine-2-webp')];
+    positionImages(wrappedVine1, {x: 18, y: 416}, wrappedVineStart, {x: 765, y: 0}, wrappedVineP1);
+    positionImages(wrappedVine2, {x: 60, y: 50}, wrappedVineP2, {x: 162, y: 50}, wrappedVineEnd);
 
     const verticalVineRightStart = getElementPosition('vertical-vine-right-start');
     const verticalVineRightEnd = getElementPosition('vertical-vine-right-end');
-    const verticalVineRight = document.getElementById('vertical-vine-right');
-    positionImage(verticalVineRight, {x: 222, y: 968}, verticalVineRightStart, {x: 430, y: 4}, verticalVineRightEnd);
+    const verticalVineRight = [document.getElementById('vertical-vine-right-img'), document.getElementById('vertical-vine-right-webp')];
+    positionImages(verticalVineRight, {x: 222, y: 968}, verticalVineRightStart, {x: 430, y: 4}, verticalVineRightEnd);
 
     const verticalVineLeftStart = getElementPosition('vertical-vine-left-start');
     const verticalVineLeftEnd = getElementPosition('vertical-vine-left-end');
-    const verticalVineLeft = document.getElementById('vertical-vine-left');
-    positionImage(verticalVineLeft, {x: 128, y: 768}, verticalVineLeftStart, {x: 28, y: 8}, verticalVineLeftEnd);
+    const verticalVineLeft = [document.getElementById('vertical-vine-left-img'), document.getElementById('vertical-vine-left-webp')];
+    positionImages(verticalVineLeft, {x: 128, y: 768}, verticalVineLeftStart, {x: 28, y: 8}, verticalVineLeftEnd);
 
     const wallVineStart = getElementPosition('wall-vine-start');
     const wallVineEnd = getElementPosition('wall-vine-end');
-    const wallVine = document.getElementById('wall-vine');
-    positionImage(wallVine, {x: 650, y: 1130}, wallVineStart, {x: 14, y: 16}, wallVineEnd);
+    const wallVine = [document.getElementById('wall-vine-img'), document.getElementById('wall-vine-webp')];
+    positionImages(wallVine, {x: 650, y: 1130}, wallVineStart, {x: 14, y: 16}, wallVineEnd);
 };
 
-const positionImage = (element, anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale, debug) => {
+const positionImages = (elements, anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale) => {
+    if (elements[0]) {
+        positionImage(elements[0], anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale);
+    }
+    if (elements[1]) {
+        positionImage(elements[1], anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale);
+    }
+};
+
+const positionImage = (element, anchorOffsetA, positionA, anchorOffsetB, positionB, uniformScale) => {
     if (uniformScale === undefined) {
         uniformScale = true;
-    }
-
-    if (debug) {
-        console.log()
     }
 
     let scaleX;

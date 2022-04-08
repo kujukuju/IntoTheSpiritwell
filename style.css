@@ -560,6 +560,8 @@ body.mobile .feature .parallax img.image2 {
 
 .feature .parallax img.dynamic.vineWrapped1 {
     width: 765px;
+
+    z-index: 0;
 }
 
 .feature .parallax img.dynamic.vineWrapped2 {
@@ -949,8 +951,8 @@ body.mobile .feature .parallax .kodamaVineEnd {
 }
 
 body.mobile .feature .parallax .kodamaVineP2 {
-    left: calc(-5vw + 73vw);
-    top: calc(-6vw + 75.2vw);
+    left: calc(-5vw + 63vw);
+    top: calc(-6vw + 84.4vw);
 }
 
 .feature .parallax .kodamaVineP1 {
@@ -959,8 +961,8 @@ body.mobile .feature .parallax .kodamaVineP2 {
 }
 
 body.mobile .feature .parallax .kodamaVineP1 {
-    left: calc(-5vw + 65.5vw);
-    top: calc(-6vw + 96.5vw);
+    left: calc(-5vw + 71.5vw);
+    top: calc(-6vw + 150.5vw);
 }
 
 .feature .parallax .fireVineEnd {

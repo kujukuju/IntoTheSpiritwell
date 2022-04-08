@@ -44,15 +44,39 @@
         }
     </script>
     <div class="header">
-        <img draggable="false" class="layer1" alt="into the spiritwell kodama background mushrooms" src="bg-parallax-background.jpg" id="layer1" />
-        <img draggable="false" class="layer2" alt="spiritwell game background mushrooms small" src="bg-parallax-mushrooms-small.png" id="layer2" />
-        <img draggable="false" class="layer3" alt="spiritwell ghibli style background mushrooms large" src="bg-parallax-mushrooms-large.png" id="layer3" />
-        <img draggable="false" class="layer4" alt="spiritwell water stream ghibli anime style" src="bg-parallax-water.png" id="layer4" />
-        <img draggable="false" class="layer5" alt="spiritwell cave columns exploring kodama game" src="bg-parallax-columns.png" id="layer5" />
-        <img draggable="false" class="layer6" alt="spiritwell plant leaves inside forset cave" src="bg-parallax-vines.png" id="layer6" />
-        <img draggable="false" class="layer7" alt="into the spiritwell lighting godrays elemental combinations" src="bg-parallax-lighting.png" id="layer7" />
-        <img draggable="false" class="layer8" alt="into the spiritwell foreground" src="fg.png" id="layer8" />
-        <img draggable="false" class="layer9" alt="into the spiritwell parallax foreground" src="fg-parallax.png" id="layer9" />
+        <img draggable="false" alt="into the spiritwell kodama background mushrooms" src="bg-parallax-background.jpg" id="layer1-img" />
+        <picture>
+            <source srcset="bg-parallax-mushrooms-small.webp" type="image/webp" id="layer2-webp">
+            <img draggable="false" alt="spiritwell game background mushrooms small" src="bg-parallax-mushrooms-small.png" id="layer2-img" />
+        </picture>
+        <picture>
+            <source srcset="bg-parallax-mushrooms-large.webp" type="image/webp" id="layer3-webp">
+            <img draggable="false" alt="spiritwell ghibli style background mushrooms large" src="bg-parallax-mushrooms-large.png" id="layer3-img" />
+        </picture>
+        <picture>
+            <source srcset="bg-parallax-water.webp" type="image/webp" id="layer4-webp">
+            <img draggable="false" alt="spiritwell water stream ghibli anime style" src="bg-parallax-water.png" id="layer4-img" />
+        </picture>
+        <picture>
+            <source srcset="bg-parallax-columns.webp" type="image/webp" id="layer5-webp">
+            <img draggable="false" alt="spiritwell cave columns exploring kodama game" src="bg-parallax-columns.png" id="layer5-img" />
+        </picture>
+        <picture>
+            <source srcset="bg-parallax-vines.webp" type="image/webp" id="layer6-webp">
+            <img draggable="false" alt="spiritwell plant leaves inside forset cave" src="bg-parallax-vines.png" id="layer6-img" />
+        </picture>
+        <picture>
+            <source srcset="bg-parallax-lighting.webp" type="image/webp" id="layer7-webp">
+            <img draggable="false" alt="into the spiritwell lighting godrays elemental combinations" src="bg-parallax-lighting.png" id="layer7-img" />
+        </picture>
+        <picture>
+            <source srcset="fg.webp" type="image/webp" id="layer8-webp">
+            <img draggable="false" alt="into the spiritwell foreground" src="fg.png" id="layer8-img" />
+        </picture>
+        <picture>
+            <source srcset="fg-parallax.webp" type="image/webp" id="layer9-webp">
+            <img draggable="false" alt="into the spiritwell parallax foreground" src="fg-parallax.png" id="layer9-img" />
+        </picture>
         <div class="title">
             <p style="position:relative;left:-20px;margin:0;"><span class="large">Into</span><span class="small"> the</span></p>
             <p style="position:relative;margin:0;margin-top:calc(-1rem - 28px);">Spiritwell</p>
@@ -96,7 +120,10 @@
         <div class="parallax" id="parallax-1">
             <div class="marker verticalVineRightEnd" id="vertical-vine-right-end"></div>
             <div class="marker verticalVineLeftEnd" id="vertical-vine-left-end"></div>
-            <img class="image1" draggable="false" alt="into the spiritwell elemental reactions with cute kodama sacrifices" src="website-image-1.png" />
+            <picture>
+                <source srcset="website-image-1.webp" type="image/webp" class="image1">
+                <img class="image1" draggable="false" alt="into the spiritwell elemental reactions with cute kodama sacrifices" src="website-image-1.png" />
+            </picture>
         </div>
         <div class="more">
             <div class="centered visible" id="callout-1">
@@ -130,7 +157,10 @@
             <div class="marker wrappedVineEnd" id="wrapped-vine-end"></div>
             <div class="marker wrappedVineP2" id="wrapped-vine-p2"></div>
             <div class="marker wrappedVineP1" id="wrapped-vine-p1"></div>
-            <img class="image2" draggable="false" alt="into the spiritwell kodama party game betrayal ghibli style" src="website-image-2.png" />
+            <picture>
+                <source srcset="website-image-2.webp" type="image/webp" class="image2">
+                <img class="image2" draggable="false" alt="into the spiritwell kodama party game betrayal ghibli style" src="website-image-2.png" />
+            </picture>
         </div>
         <div class="more">
             <div class="centered visible" id="callout-2">
@@ -154,15 +184,42 @@
     </div>
     <div class="feature last">
         <div class="parallax static" id="parallax-3">
-            <img class="image3boss" draggable="false" alt="into the spiritwell plant boss enemy flammable boss fight" src="boss.png" id="boss-image" />
-            <img class="dynamic vineHoldingKodama1" draggable="false" alt="spiritwell plant boss vine on fire" src="vine-holding-kodama-1.png" id="kodama-vine-1" />
-            <img class="dynamic vineHoldingKodama2" draggable="false" alt="spiritwell plant boss vine holding cute ghibli anime kodama as hostage" src="vine-holding-kodama-2.png" id="kodama-vine-2" />
-            <img class="dynamic vineFire" draggable="false" alt="spiritwell boss vine arm on fire" src="vine-fire.png" id="fire-vine" />
-            <img class="dynamic vineWrapped1" draggable="false" alt="spiritwell boss vine arm wrapped" src="vine-wrapped-1.png" id="wrapped-vine-1" style="z-index: 0;" />
-            <img class="dynamic vineWrapped2" draggable="false" alt="spiritwell boss vine arm wrapped segment" src="vine-wrapped-2.png" id="wrapped-vine-2" />
-            <img class="dynamic vineVerticalLeft" draggable="false" alt="spiritwell vertical boss vine arm" src="vine-vertical-left.png" id="vertical-vine-left" />
-            <img class="dynamic vineVerticalRight" draggable="false" alt="spiritwell vertical boss vine arm" src="vine-vertical-right.png" id="vertical-vine-right" />
-            <img class="dynamic vineWall" draggable="false" alt="spiritwell wall boss vine arm" src="vine-wall.png" id="wall-vine" />
+            <picture>
+                <source srcset="boss.webp" type="image/webp" class="image3boss" id="boss-image-webp">
+                <img class="image3boss" draggable="false" alt="into the spiritwell plant boss enemy flammable boss fight" src="boss.png" id="boss-image-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-holding-kodama-1.webp" type="image/webp" class="dynamic vineHoldingKodama1" id="kodama-vine-1-webp">
+                <img class="dynamic vineHoldingKodama1" draggable="false" alt="spiritwell plant boss vine on fire" src="vine-holding-kodama-1.png" id="kodama-vine-1-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-holding-kodama-2.webp" type="image/webp" class="dynamic vineHoldingKodama2" id="kodama-vine-2-webp">
+                <img class="dynamic vineHoldingKodama2" draggable="false" alt="spiritwell plant boss vine holding cute ghibli anime kodama as hostage" src="vine-holding-kodama-2.png" id="kodama-vine-2-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-fire.webp" type="image/webp" class="dynamic vineFire" id="fire-vine-webp">
+                <img class="dynamic vineFire" draggable="false" alt="spiritwell boss vine arm on fire" src="vine-fire.png" id="fire-vine-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-wrapped-1.webp" type="image/webp" class="dynamic vineWrapped1" id="wrapped-vine-1-webp">
+                <img class="dynamic vineWrapped1" draggable="false" alt="spiritwell boss vine arm wrapped" src="vine-wrapped-1.png" id="wrapped-vine-1-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-wrapped-2.webp" type="image/webp" class="dynamic vineWrapped2" id="wrapped-vine-2-webp">
+                <img class="dynamic vineWrapped2" draggable="false" alt="spiritwell boss vine arm wrapped segment" src="vine-wrapped-2.png" id="wrapped-vine-2-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-vertical-left.webp" type="image/webp" class="dynamic vineVerticalLeft" id="vertical-vine-left-webp">
+                <img class="dynamic vineVerticalLeft" draggable="false" alt="spiritwell vertical boss vine arm" src="vine-vertical-left.png" id="vertical-vine-left-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-vertical-right.webp" type="image/webp" class="dynamic vineVerticalRight" id="vertical-vine-right-webp">
+                <img class="dynamic vineVerticalRight" draggable="false" alt="spiritwell vertical boss vine arm" src="vine-vertical-right.png" id="vertical-vine-right-img" />
+            </picture>
+            <picture>
+                <source srcset="vine-wall.webp" type="image/webp" class="dynamic vineWall" id="wall-vine-webp">
+                <img class="dynamic vineWall" draggable="false" alt="spiritwell wall boss vine arm" src="vine-wall.png" id="wall-vine-img" />
+            </picture>
         </div>
         <div class="more">
             <div class="centered visible" id="callout-3">
