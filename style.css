@@ -256,7 +256,6 @@ body.mobile .subscribe {
     top: 0;
     left: 50%;
 
-    /* background-color: #040404; */
     width: calc(359 / 180 * 6rem);
     height: 6rem;
 
@@ -330,12 +329,10 @@ body.mobile .subscribe .half .subscribeImage {
 
     z-index: 10;
 
-    /* border: 1px solid #000000; */
     padding: 2px;
 
     background-color: #e0986c;
 
-    /* box-shadow: 2px 2px 5px 0px #000000; */
 }
 
 body.mobile .subscribe .half .button {
@@ -364,7 +361,6 @@ body.mobile .subscribe .half .button {
     transition: 500ms opacity ease;
     transition-delay: 500ms;
 
-    /* background-color: #aa00aa; */
     width: 100%;
     height: 100%;
 
@@ -386,15 +382,12 @@ body.mobile .subscribe .half .button {
 }
 
 .subscribe .half .button input[type=email] {
-    /*font-size: 1rem;*/
-
     padding: 6px 8px;
     border: none;
     outline: none;
 
     width: 50%;
     font-size: 2.5rem;
-    /* line-height: 2.5rem; */
 
     font-family: inherit;
 
@@ -404,8 +397,6 @@ body.mobile .subscribe .half .button {
 }
 
 .subscribe .half .button input[type=submit] {
-    /*font-size: 1rem;*/
-
     color: #000000;
     background-color: #609AE0;
 
@@ -413,8 +404,6 @@ body.mobile .subscribe .half .button {
     border: none;
     outline: none;
     font-size: 1.5rem;
-    
-    /* line-height: 2.5rem; */
 
     margin-left: 4px;
 
@@ -453,12 +442,6 @@ body.mobile .subscribe .half .button {
     padding-right: 12vw;
 }
 
-/* body.mobile .feature.reversed {
-    flex-direction: row;
-    padding-left: 12vw;
-    padding-right: 0;
-} */
-
 .feature.last {
     margin-bottom: 4.5rem;
 }
@@ -471,8 +454,6 @@ body.mobile .feature {
 
 .feature .parallax {
     position: relative;
-
-    /* width: 60%; */
 
     height: 32vw;
 }
@@ -496,10 +477,7 @@ body.mobile .feature {
     left: -6vw;
 
     width: 65.1041667vw;
-    /* max-width: 1250px; */
     height: auto;
-    /* height: 800px;
-    width: auto; */
 }
 
 body.mobile .feature .parallax img.image1 {
@@ -513,10 +491,7 @@ body.mobile .feature .parallax img.image1 {
     right: -8vw;
 
     width: 62.5vw;
-    /* max-width: 1200px; */
     height: auto;
-    /* height: 1200px;
-    width: auto; */
 }
 
 body.mobile .feature .parallax img.image2 {
@@ -529,12 +504,6 @@ body.mobile .feature .parallax img.image2 {
     position: absolute;
     top: -1296px;
     left: -938px;
-
-    /* width: 130.208333vw;
-    height: auto; */
-    
-    /* height: 2160px;
-    width: auto; */
 
     z-index: 50;
 }
@@ -601,16 +570,12 @@ body.mobile .feature .parallax img.dynamic.vineVerticalLeft {
 
     flex-grow: 1;
 
-    /* padding: 0 2vmin; */
-
     box-sizing: border-box;
     margin-left: -20vw;
     margin-right: 0;
 
     padding-left: 0;
     padding-right: 5vw;
-
-    /* min-width: 40%; */
 
     z-index: 100;
 }
@@ -665,12 +630,6 @@ body.mobile .feature.last .more {
     transition: opacity 250ms ease;
     transition-delay: 0ms;
 
-    /* padding: 8px; */
-
-    /* background-color: rgba(235, 233, 233, 1); */
-    /* border-radius: 8px; */
-    /* filter: drop-shadow(2px 2px 1px rgba(0, 0, 0, 0.5)); */
-
     z-index: 0;
 }
 
@@ -693,10 +652,6 @@ body.mobile .feature.last .more .centered {
     top: -10rem;
 }
 
-/* body.mobile .feature.first .more .centered {
-    top: -24rem;
-} */
-
 .feature .more .centered.visible {
     opacity: 1;
     transition-delay: 200ms;
@@ -710,23 +665,11 @@ body.mobile .feature.last .more .centered {
     font-size: 2.5rem;
     line-height: 1.2;
 
-    /* margin-bottom: 20px; */
     padding-bottom: 8px;
 
     background-color: #ebe9e9;
 
-    /* background-color: #e0986c; */
     border-radius: 4px;
-
-    /* background-color: rgba(255, 255, 255, 0.75);
-    box-shadow: 8px 0 0 0 rgba(255, 255, 255, 0.75), -8px 0 0 0 rgba(255, 255, 255, 0.75); */
-    /* background-color: rgba(224, 152, 108, 0.75);
-    box-shadow: 8px 0 0 0 rgba(224, 152, 108, 0.75), -8px 0 0 0 rgba(224, 152, 108, 0.75); */
-
-    /* text-shadow: 1px 0 #ffffff, 0 1px #ffffff, -1px 0 #ffffff, 0 -1px #ffffff; */
-    /* text-shadow: 1px 1px #ebe9e9, 2px 2px #ebe9e9; */
-
-    /* filter: drop-shadow(0px 0px 1px rgba(235, 233, 233, 0.5)); */
 
     font-family: Ghibli, sans-serif;
     letter-spacing: 2px;
@@ -755,18 +698,7 @@ body.mobile .feature .more .centered .title {
 
     background-color: #ebe9e9;
 
-    /* background-color: #e0986c; */
     border-radius: 4px;
-
-    /* background-color: rgba(255, 255, 255, 0.75);
-    box-shadow: 8px 0 0 0 rgba(255, 255, 255, 0.75), -8px 0 0 0 rgba(255, 255, 255, 0.75); */
-    /* background-color: rgba(224, 152, 108, 0.75);
-    box-shadow: 8px 0 0 0 rgba(224, 152, 108, 0.75), -8px 0 0 0 rgba(224, 152, 108, 0.75); */
-
-    /* text-shadow: 1px 0 #ffffff, 0 1px #ffffff, -1px 0 #ffffff, 0 -1px #ffffff; */
-    /* text-shadow: 1px 1px #ebe9e9, 2px 2px #ebe9e9; */
-
-    /* filter: drop-shadow(0px 0px 1px rgba(235, 233, 233, 0.5)); */
 
     transition: color 100ms ease;
 }
@@ -784,16 +716,12 @@ body.mobile .feature .more .moreButton {
     top: 50%;
     left: 10%;
 
-    /* width: 60%; */
-
     display: inline-block;
     opacity: 0;
 
     font-size: 1.5rem;
     font-family: Ghibli, sans-serif;
     letter-spacing: 2px;
-
-    /* text-shadow: 2px 2px rgba(255, 255, 255, 0.75); */
 
     transform: translateY(-50%);
 
@@ -856,15 +784,8 @@ body.mobile .feature.last .more .moreInformation {
     background-color: #0c0b0b;
 }
 
-/* position markers */
 .marker {
     position: absolute;
-
-    /* width: 10px;
-    height: 10px; */
-
-    /* background-color: #ff00aa; */
-    /* z-index: 1000; */
 }
 
 .bottomInfo .offset {
