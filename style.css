@@ -9,7 +9,38 @@ html, body {
 
     background-color: #ebe9e9;
 
-    font-family: Ghibli, sans-serif;
+    font-family: Ghibli, serif;
+}
+
+.bold {
+    font-family: GhibliBold, serif;
+    font-weight: bolder;
+}
+
+.english {
+    font-family: Ghibli, serif;
+}
+
+.english .bold {
+    font-family: GhibliBold, serif;
+}
+
+.japanese {
+    font-family: "MS UI Gothic", serif;
+}
+
+.japanese .bold {
+    font-family: "MS UI Gothic", serif;
+    font-weight: bolder;
+}
+
+.chinese {
+    font-family: "NSimSun", serif;
+}
+
+.chinese .bold {
+    font-family: "NSimSun", serif;
+    font-weight: bolder;
 }
 
 @media screen and (min-width: 320px) {
@@ -62,6 +93,95 @@ p {
     line-height: 1.4;
     margin-block-start: 0.5rem;
     margin-block-end: 0.5rem;
+}
+
+.languageSelector {
+    position: absolute;
+    top: 6vmin;
+    right: 6vmin;
+
+    opacity: 0.5;
+
+    transition: 100ms opacity ease;
+
+    z-index: 10001;
+
+    user-select: none;
+    
+    font-family: Ghibli, serif;
+}
+
+.languageSelector:hover {
+    opacity: 1;
+}
+
+.languageSelector .downArrow {
+    display: inline-block;
+
+    width: 0.5rem;
+    height: 0.5rem;
+
+    border-right: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+
+    margin-right: 8px;
+
+    transform-origin: 0.5rem 0.25rem;
+    transform: translateY(-50%) rotate(-45deg);
+
+    transition: 100ms transform ease;
+}
+
+.languageSelector:hover .downArrow {
+    transform: translateY(-25%) rotate(45deg);
+}
+
+.languageSelector .selectedLanguage {
+    display: inline-block;
+
+    color: #ffffff;
+
+    font-size: 1rem;
+}
+
+.languageSelector .languageList {
+    padding-top: 8px;
+
+    height: 0;
+    overflow: hidden;
+}
+
+.languageSelector:hover .languageList {
+    height: auto;
+}
+
+.languageSelector .languageList div {
+    padding-left: calc(0.707106781rem + 8px - 2px);
+}
+
+.languageSelector .languageList p {
+    display: inline-block;
+
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+
+    padding: 0 2px;
+
+    transition: 100ms background-color ease;
+
+    cursor: pointer;
+}
+
+.languageSelector .languageList p:hover {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.languageSelector .languageList p.selected {
+    cursor: default;
+
+    background-color: #ffffff;
+
+    /* color: #ffffff; */
 }
 
 .mobileRotate {
@@ -214,7 +334,7 @@ body.loaded .mobileRotate.visible .rightArrow {
 
     opacity: 0;
 
-    font-family: GhibliBold, sans-serif;
+    font-family: GhibliBold, serif;
 
     transition: opacity 2s ease-in;
 
@@ -331,7 +451,6 @@ body .scrollArrowContainer .scrollArrow.hidden {
 
     z-index: 10;
 
-    font-family: Ghibli, sans-serif;
     letter-spacing: 4px;
 
     transition: 500ms left ease;
@@ -422,8 +541,6 @@ body.mobile .subscribe .half .subscribeImage {
 
     margin-top: 2rem;
     margin-bottom: 2rem;
-
-    font-family: GhibliBold, sans-serif;
 }
 
 .subscribe .half .text {
@@ -787,7 +904,6 @@ body.mobile .feature.last .more .centered {
 
     border-radius: 4px;
 
-    font-family: Ghibli, sans-serif;
     letter-spacing: 2px;
 }
 
@@ -801,7 +917,6 @@ body.mobile .feature .more .centered .title {
     font-size: 1.75rem;
     line-height: 1.2;
 
-    font-family: GhibliBold, sans-serif;
     letter-spacing: 2px;
 
     cursor: pointer;
@@ -836,7 +951,6 @@ body.mobile .feature .more .moreButton {
     opacity: 0;
 
     font-size: 1.5rem;
-    font-family: Ghibli, sans-serif;
     letter-spacing: 2px;
 
     transform: translateY(-50%);

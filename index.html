@@ -38,7 +38,7 @@
         gtag('config', 'G-RGG99L9T2V');
     </script>
 </head>
-<body>
+<body class="english">
     <script>
         if (window.innerWidth <= 1200) {    
             document.body.classList.add('mobile');
@@ -46,6 +46,25 @@
             document.body.classList.remove('mobile');
         }
     </script>
+    <div class="languageSelector">
+        <div class="downArrow"></div>
+        <div class="selectedLanguage" id="language-selected">English</div>
+        <div class="languageList">
+            <div><p id="language-english" data-language="english" class="selected">English</p></div>
+            <div><p id="language-japanese" data-language="japanese">日本語</p></div>
+            <div><p id="language-chinese" data-language="chinese">中文</p></div>
+            <div><p id="language-spanish" data-language="spanish">Español</p></div>
+            <div><p id="language-german" data-language="german">Deutsch</p></div>
+            <div><p id="language-french" data-language="french">Française</p></div>
+            <div><p id="language-portuguese" data-language="portuguese">Português</p></div>
+            <div><p id="language-finnish" data-language="finnish">Suomalainen</p></div>
+            <div><p id="language-korean" data-language="korean">한국어</p></div>
+            <div><p id="language-polish" data-language="polish">Polska</p></div>
+            <div><p id="language-ukrainian" data-language="ukrainian">український</p></div>
+            <div><p id="language-russian" data-language="russian">Русский</p></div>
+
+        </div>
+    </div>
     <div class="mobileRotate" id="mobile-rotate">
         <div class="phone"></div>
         <div class="leftArrow"></div>
@@ -110,7 +129,7 @@
                 <img class="subscribeImage" draggable="false" alt="cute kodama subscribe image with leaf holding a sign" src="subscribe.png" />
             </picture>
             <div class="button" id="subscribe-area">
-                <div class="thanks"><p>Thank you!</p></div>
+                <div class="thanks"><p id="sub-thank-you">Thank you!</p></div>
                 <input type="email" placeholder="Email" name="EMAIL" id="mce-EMAIL" required>
                 <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_51d8942997a13c89dde0dd07f_b2da44877c" tabindex="-1" value="" id="kinda-email"></div>
                 <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe">
@@ -118,10 +137,10 @@
         </div>
         <div class="center"></div>
         <div class="half">
-            <div class="title">
+            <div class="title bold" id="stay-tuned-title">
                 STAY TUNED
             </div>
-            <p class="text">
+            <p class="text" id="stay-tuned-text">
                 We'll be at Steam Next Fest in 2023!
             </p>
         </div>
@@ -138,23 +157,23 @@
         </div>
         <div class="more">
             <div class="centered visible" id="callout-1">
-                <div class="title">Elemental Alchemy Reactions</div>
+                <div class="title" id="feature-title-1">Elemental Alchemy Reactions</div>
                 <br />
-                <div class="moreButton" id="read-more-1">READ MORE</div>
+                <div class="moreButton bold" id="read-more-1">READ MORE</div>
             </div>
             <div class="moreInformation" id="information-1">
                 <div>
                     <div>
-                        <p>Sacrifice your character to produce elements and combine them for powerful results!</p>
+                        <p id="feature-1-text-1">Sacrifice your character to produce elements and combine them for powerful results!</p>
                     </div>
                     <div>
-                        <p>Use these elemental effects to unlock new areas, defeat enemies, and progress.</p>
+                        <p id="feature-1-text-2">Use these elemental effects to unlock new areas, defeat enemies, and progress.</p>
                     </div>
                     <div>
-                        <p>Work with your teammates to discover all the different interactions.</p>
+                        <p id="feature-1-text-3">Work with your teammates to discover all the different interactions.</p>
                     </div>
                 </div>
-                <div class="moreButton hide" id="hide-1">HIDE</div>
+                <div class="moreButton bold hide" id="hide-1">HIDE</div>
             </div>
             <div class="cover"></div>
         </div>
@@ -175,20 +194,20 @@
         </div>
         <div class="more">
             <div class="centered visible" id="callout-2">
-                <div class="title">Online Mutliplayer Co-op</div>
+                <div class="title" id="feature-title-2">Online Mutliplayer Co-op</div>
                 <br />
-                <div class="moreButton" id="read-more-2">READ MORE</div>
+                <div class="moreButton bold" id="read-more-2">READ MORE</div>
             </div>
             <div class="moreInformation" id="information-2">
                 <div>
                     <div>
-                        <p>Work together with your friends...</p>
+                        <p id="feature-2-text-1">Work together with your friends...</p>
                     </div>
                     <div>
-                        <p>Or not.</p>
+                        <p id="feature-2-text-2">Or not.</p>
                     </div>
                 </div>
-                <div class="moreButton hide" id="hide-2">HIDE</div>
+                <div class="moreButton bold hide" id="hide-2">HIDE</div>
             </div>
             <div class="cover"></div>
         </div>
@@ -234,26 +253,26 @@
         </div>
         <div class="more">
             <div class="centered visible" id="callout-3">
-                <div class="title">Team Based Boss Fights</div>
+                <div class="title" id="feature-title-3">Team Based Boss Fights</div>
                 <br />
-                <div class="moreButton" id="read-more-3">READ MORE</div>
+                <div class="moreButton bold" id="read-more-3">READ MORE</div>
             </div>
             <div class="moreInformation" id="information-3">
                 <div>
                     <div>
-                        <p>Bosses are both straight up fights and complex puzzles.</p>
+                        <p id="feature-3-text-1">Bosses are both straight up fights and complex puzzles.</p>
                     </div>
                     <div>
-                        <p>Take advantage of their weaknesses with your elemental transformations.</p>
+                        <p id="feature-3-text-2">Take advantage of their weaknesses with your elemental transformations.</p>
                     </div>
                     <div>
-                        <p>Defeat them to steal their powers and discover even more interactions.</p>
+                        <p id="feature-3-text-3">Defeat them to steal their powers and discover even more interactions.</p>
                     </div>
                     <div>
-                        <p>That's the spirit!</p>
+                        <p id="feature-3-text-4">That's the spirit!</p>
                     </div>
                 </div>
-                <div class="moreButton hide" id="hide-3">HIDE</div>
+                <div class="moreButton bold hide" id="hide-3">HIDE</div>
             </div>
             <div class="cover"></div>
         </div>

@@ -45,6 +45,9 @@ const verticalMovement = [
     1,
 ];
 
+const languageElements = [];
+const translationElements = {};
+
 let scrollArrowElement = null;
 let scrollTargetElement = null;
 let descriptionElement = null;
@@ -60,6 +63,8 @@ const mouseOffset = [0, 0];
 let playingDefaultAnimation = true;
 let defaultAnimationStartTime = 0;
 
+let ready = false;
+
 window.addEventListener('load', () => {
     headers[0] = [document.getElementById('layer1-img')];
     headers[1] = [document.getElementById('layer2-img'), document.getElementById('layer2-webp')];
@@ -70,6 +75,11 @@ window.addEventListener('load', () => {
     headers[6] = [document.getElementById('layer7-img'), document.getElementById('layer7-webp')];
     headers[7] = [document.getElementById('layer8-img'), document.getElementById('layer8-webp')];
     headers[8] = [document.getElementById('layer9-img'), document.getElementById('layer9-webp')];
+
+    descriptionElement = document.getElementById('description');
+    topDescriptionElement = document.getElementById('description-top');
+    bottomDescriptionElement = document.getElementById('description-bottom');
+    mobileRotate = document.getElementById('mobile-rotate');
 
     let count = 0;
     for (let i = 0; i < headers.length; i++) {
@@ -94,6 +104,17 @@ window.addEventListener('load', () => {
             });
         }
     }
+
+    fillLanguage('english');
+    const queryLanguageElements = document.querySelectorAll('[data-language]');
+    queryLanguageElements.forEach(element => {
+        languageElements.push(element);
+    });
+    for (const elementID in languageContent) {
+        translationElements[elementID] = document.getElementById(elementID);
+    }
+    initializeLanguages();
+    selectDefaultLanguage();
 
     initializeInformation(
         document.getElementById('callout-1'),
@@ -121,11 +142,6 @@ window.addEventListener('load', () => {
         document.getElementById('scroll-target'),
     );
 
-    descriptionElement = document.getElementById('description');
-    topDescriptionElement = document.getElementById('description-top');
-    bottomDescriptionElement = document.getElementById('description-bottom');
-    mobileRotate = document.getElementById('mobile-rotate');
-
     document.getElementById('mc-embedded-subscribe').addEventListener('click', event => {
         subscribe();
     });
@@ -138,6 +154,8 @@ window.addEventListener('load', () => {
 
     scrollCallback();
     adjustBossImages();
+
+    ready = true;
 
     window.requestAnimationFrame(animationFrame);
 });
@@ -247,11 +265,19 @@ const scrollCallback = () => {
 };
 
 window.addEventListener('scroll', event => {
+    if (!ready) {
+        return;
+    }
+
     scrollCallback();
 });
 
 window.addEventListener("deviceorientation", event => {
     if (!MOBILE) {
+        return;
+    }
+
+    if (!ready) {
         return;
     }
 
@@ -272,6 +298,10 @@ window.addEventListener('mousemove', event => {
         return;
     }
 
+    if (!ready) {
+        return;
+    }
+
     if (playingDefaultAnimation) {
         playingDefaultAnimation = false;
         showMobileControls();
@@ -284,6 +314,10 @@ window.addEventListener('mousemove', event => {
 });
 
 window.addEventListener('resize', event => {
+    if (!ready) {
+        return;
+    }
+
     adjustBossImages();
 });
 
@@ -299,7 +333,7 @@ const showMobileControls = () => {
 };
 
 const loaded = () => {
-    document.body.className = 'loaded';
+    document.body.classList.add('loaded');
 };
 
 const animationFrame = () => {
@@ -502,4 +536,470 @@ const radiansBetweenAngles = (angleFrom, angleTo) => {
             return angleTo - angleFrom;
         }
     }
+};
+
+const fillLanguage = (language) => {
+    for (const id in languageContent) {
+        const element = document.getElementById(id);
+
+        if (element.tagName === 'INPUT' && element.type === 'submit') {
+            languageContent[id][language] = element.value;
+        } else if (element.tagName === 'INPUT' && element.type === 'email') {
+            languageContent[id][language] = element.placeholder;
+        } else {
+            languageContent[id][language] = element.innerText;
+        }
+    }
+};
+
+const initializeLanguages = () => {
+    for (let i = 0; i < languageElements.length; i++) {
+        const languageElement = languageElements[i];
+        const language = languageElement.dataset.language;
+
+        languageElement.addEventListener('click', () => {
+            selectLanguage(language);
+        });
+    }
+};
+
+const selectLanguage = (language) => {
+    let languageElement = null;
+    for (let i = 0; i < languageElements.length; i++) {
+        if (languageElements[i].dataset.language === language) {
+            languageElement = languageElements[i];
+            break;
+        }
+    }
+    if (!languageElement) {
+        console.error('Unknown language. ', language);
+        return;
+    }
+    if (languageElement.classList.contains('selected')) {
+        return;
+    }
+
+    for (let i = 0; i < languageElements.length; i++) {
+        languageElements[i].classList.remove('selected');
+        document.body.classList.remove(languageElements[i].dataset.language);
+    }
+    languageElement.classList.add('selected');
+    document.body.classList.add(language);
+
+    document.getElementById('language-selected').innerText = languageElement.innerText;
+
+    for (const elementID in translationElements) {
+        if (translationElements[elementID].tagName === 'INPUT' && translationElements[elementID].type === 'submit') {
+            translationElements[elementID].value = languageContent[elementID][language];
+        } else if (translationElements[elementID].tagName === 'INPUT' && translationElements[elementID].type === 'email') {
+            translationElements[elementID].placeholder = languageContent[elementID][language];
+        } else {
+            translationElements[elementID].innerText = languageContent[elementID][language];
+        }
+    }
+
+    adjustBossImages();
+};
+
+const selectDefaultLanguage = () => {
+    const language = window.navigator.language;
+    if (!language) {
+        return;
+    }
+
+    for (const code in languageCodeMap) {
+        if (language.toLowerCase().startsWith(code)) {
+            selectLanguage(languageCodeMap[code]);
+            return;
+        }
+    }
+
+    console.error('Unknown default language. ', language);
+};
+
+const printEnglish = () => {
+    let string = '';
+    for (const id in languageContent) {
+        string += languageContent[id]['english'] + '\n';
+    }
+    console.log(string);
+};
+
+const languageCodeMap = {
+    'en': 'english',
+    'ja': 'japanese',
+    'zh': 'chinese',
+    'es': 'spanish',
+    'de': 'german',
+    'fr': 'french',
+    'pt': 'portuguese',
+    'fi': 'finnish',
+    'ko': 'korean',
+    'pl': 'polish',
+    'uk': 'ukrainian',
+    'ru': 'russian',
+};
+
+const languageContent = {
+    'description-top': {
+        'english': null,
+        'japanese': '腐敗した森と戦い、さまざまな元素の変身を発見し、ユニークな組み合わせを見つけて、仲間と一緒にスピリットウェルに帰ろう!',
+        'chinese': '与腐败的森林作斗争，发现不同的元素转化，并找到独特的组合，与你的朋友一起返回灵井',
+        'spanish': 'Lucha contra el bosque corrompido, descubre diferentes transformaciones elementales y encuentra combinaciones únicas para volver al Pozo de los Espíritus con tus amigos.',
+        'german': 'Kämpfe gegen den verderbten Wald, entdecke verschiedene elementare Verwandlungen und finde einzigartige Kombinationen, um mit deinen Freunden zum Geisterbrunnen zurückzukehren!',
+        'french': "Combattez la forêt corrompue, découvrez différentes transformations élémentaires et trouvez des combinaisons uniques pour retourner au Puits des esprits avec vos amis !",
+        'portuguese': 'Lute contra a floresta corrompida, descubra diferentes transformações elementais e encontre combinações únicas para voltar ao Spiritwell com seus amigos!',
+        'finnish': 'Taistele turmeltunutta metsää vastaan, löydä erilaisia elementtimuunnoksia ja löydä ainutlaatuisia yhdistelmiä palataksesi henkikaivoon ystävien kanssa!',
+        'korean': '타락한 숲에 맞서 싸우고 다양한 원소 변형을 발견하고 독특한 조합을 찾아 친구들과 함께 Spiritwell로 돌아가세요!',
+        'polish': 'Walcz ze zniszczonym lasem, odkryj różne transformacje żywiołów i znajdź unikalne kombinacje, aby powrócić z przyjaciółmi do Studni Duchów!',
+        'ukrainian': 'Боріться проти зіпсованого лісу, відкрийте для себе різні перетворення стихій і знайдіть унікальні комбінації, щоб повернутися до Духовної криниці зі своїми друзями!',
+        'russian': 'Сражайтесь с испорченным лесом, открывайте различные трансформации элементов и находите уникальные комбинации, чтобы вернуться в Колодец Духов вместе со своими друзьями!',
+    },
+    'description-bottom': {
+        'english': null,
+        'japanese': 'シェアライフに気をつけよう 一度外に出てしまうと、次の挑戦のためにスピリットウェルを通して一部の知識しか持ち帰ることができなくなります。',
+        'chinese': '小心你的共享生命。一旦你出去了，你就只能通过灵井把一些知识带回来，供你下次尝试。',
+        'spanish': 'Cuidado con las vidas compartidas. Una vez que estés fuera, sólo podrás traer algunos conocimientos a través del Pozo de los Espíritus para tu próximo intento.',
+        'german': 'Seid vorsichtig mit euren gemeinsamen Leben. Wenn ihr einmal draußen seid, könnt ihr nur ein gewisses Wissen für euren nächsten Versuch durch den Geisterbrunnen mitnehmen.',
+        'french': "Attention à vos vies partagées. Une fois que vous serez sortis, vous ne pourrez ramener que certaines connaissances par le Puits des Esprits pour votre prochaine tentative.",
+        'portuguese': 'Cuidado com suas vidas compartilhadas. Uma vez fora, você só poderá trazer algum conhecimento de volta através do Spiritwell para sua próxima tentativa.',
+        'finnish': 'Varokaa yhteisiä elämiänne. Kun olette ulkona, voitte tuoda vain osan tiedoista takaisin henkikaivon kautta seuraavaa yritystä varten.',
+        'korean': '공유 생활에주의하십시오. 일단 나가면 다음 시도를 위해 Spiritwell을 통해 일부 지식을 다시 가져올 수 있습니다.',
+        'polish': 'Uważaj na swoje wspólne życie. Kiedy już wyjdziecie, będziecie mogli przywrócić tylko część wiedzy przez Studnię Duchów, aby podjąć następną próbę.',
+        'ukrainian': 'Бережіть спільне життя. Після того, як ви вийдете, ви зможете лише повернути певні знання через Spiritwell для наступної спроби.',
+        'russian': 'Будьте осторожны с вашими общими жизнями. Выйдя из игры, вы сможете вернуть некоторые знания только через Колодец Духов для следующей попытки.',
+    },
+    'sub-thank-you': {
+        'english': null,
+        'japanese': 'ありがとうございました。',
+        'chinese': '谢谢你',
+        'spanish': '¡Gracias!',
+        'german': 'Vielen Dank an euch!',
+        'french': "Merci !",
+        'portuguese': 'Obrigado!',
+        'finnish': 'Kiitos!',
+        'korean': '감사합니다!',
+        'polish': 'Dziękujemy!',
+        'ukrainian': 'Дякую!',
+        'russian': 'Спасибо!',
+    },
+    'mce-EMAIL': {
+        'english': null,
+        'japanese': 'メール',
+        'chinese': '电子邮件',
+        'spanish': 'Envía un correo electrónico a',
+        'german': 'E-Mail an',
+        'french': "Envoyer un courriel à",
+        'portuguese': 'Envie um e-mail para',
+        'finnish': 'Sähköposti',
+        'korean': '이메일',
+        'polish': 'Wyślij e-mail na adres',
+        'ukrainian': 'Електронна пошта',
+        'russian': 'Эл. адрес',
+    },
+    'mc-embedded-subscribe': {
+        'english': null,
+        'japanese': '登録する',
+        'chinese': '订阅',
+        'spanish': 'Suscríbase a',
+        'german': 'Abonnieren',
+        'french': "S'abonner à",
+        'portuguese': 'Assine',
+        'finnish': 'Tilaa',
+        'korean': '구독하다',
+        'polish': 'Subskrybuj',
+        'ukrainian': 'Підписатися',
+        'russian': 'Подписаться',
+    },
+    'stay-tuned-title': {
+        'english': null,
+        'japanese': '注目',
+        'chinese': '敬请关注',
+        'spanish': 'SIGUE CONTINUANDO',
+        'german': 'DRANBLEIBEN',
+        'french': "RESTEZ À L'ÉCOUTE",
+        'portuguese': 'FIQUE ATENTO',
+        'finnish': 'PYSY AJAN TASALLA',
+        'korean': '계속 지켜봐 주세요',
+        'polish': 'POZOSTAŃ NA BIEŻĄCO',
+        'ukrainian': 'Стежте за оновленнями',
+        'russian': 'СЛЕДИТЕ ЗА НОВОСТЯМИ',
+    
+    },
+    'stay-tuned-text': {
+        'english': null,
+        'japanese': '2023年のSteam Next Festに参加します!',
+        'chinese': '我们会在2023年的Steam Next Fest上出现!',
+        'spanish': '¡Estaremos en el Steam Next Fest en 2023!',
+        'german': 'Wir sind beim nächsten Steam-Fest im Jahr 2023 dabei!',
+        'french': "Nous serons présents au prochain Steam Fest en 2023 !",
+        'portuguese': 'Estaremos no Steam Next Fest em 2023!',
+        'finnish': 'Olemme mukana Steam Next Festissä vuonna 2023!',
+        'korean': '2023년에는 Steam Next Fest에 참석할 예정입니다!',
+        'polish': 'Będziemy na Steam Next Fest w 2023 roku!',
+        'ukrainian': 'Ми будемо на Steam Next Fest у 2023 році!',
+        'russian': 'Мы будем на Steam Next Fest в 2023 году!',
+    
+    },
+    'feature-title-1': {
+        'english': null,
+        'japanese': 'エレメンタルアルケミーの反応',
+        'chinese': '元素炼金术的反应',
+        'spanish': 'Reacciones de Alquimia Elemental',
+        'german': 'Elementare Alchemie-Reaktionen',
+        'french': "Réactions de l'alchimie élémentaire",
+        'portuguese': 'Reações de Alquimia Elementar',
+        'finnish': 'Elementaalinen alkemia Reaktiot',
+        'korean': '원소 연금술 반응',
+        'polish': 'Alchemia Żywiołów Reakcje',
+        'ukrainian': 'Реакції елементарної алхімії',
+        'russian': 'Реакции Элементарной Алхимии',
+    },
+    'read-more-1': {
+        'english': null,
+        'japanese': 'もっと読む',
+        'chinese': '阅读更多',
+        'spanish': 'LEER MÁS',
+        'german': 'LESEN SIE MEHR',
+        'french': "LIRE PLUS",
+        'portuguese': 'LEIA MAIS',
+        'finnish': 'LUE LISÄÄ',
+        'korean': '더 읽어보기',
+        'polish': 'CZYTAJ WIĘCEJ',
+        'ukrainian': 'ЧИТАЙТЕ БІЛЬШЕ',
+        'russian': 'ЧИТАЙТЕ ДАЛЕЕ',
+    },
+    'feature-1-text-1': {
+        'english': null,
+        'japanese': 'キャラクターを犠牲にして元素を生成し、それらを組み合わせることで強力な結果を得ることができます。',
+        'chinese': '牺牲你的角色来产生元素，并将它们结合起来以获得强大的效果!',
+        'spanish': '¡Sacrifica a tu personaje para producir elementos y combínalos para obtener poderosos resultados!',
+        'german': 'Opfere deinen Charakter, um Elemente zu erzeugen und sie für mächtige Ergebnisse zu kombinieren!',
+        'french': "Sacrifiez votre personnage pour produire des éléments et combinez-les pour obtenir des résultats puissants !",
+        'portuguese': 'Sacrifique seu caráter para produzir elementos e combiná-los para obter resultados poderosos!',
+        'finnish': 'Uhraa hahmosi tuottaaksesi elementtejä ja yhdistämällä niitä saat voimakkaita tuloksia!',
+        'korean': '캐릭터를 희생하여 요소를 생성하고 강력한 결과를 위해 결합하십시오!',
+        'polish': 'Poświęć swoją postać, aby wytworzyć żywioły i połącz je, aby uzyskać potężne efekty!',
+        'ukrainian': 'Пожертвуйте своїм персонажем, щоб створити елементи та комбінуйте їх для потужних результатів!',
+        'russian': 'Принесите в жертву своего персонажа, чтобы получить элементы и объединить их для получения мощных результатов!',
+    
+    },
+    'feature-1-text-2': {
+        'english': null,
+        'japanese': 'この元素の効果を利用して、新しいエリアのロックを解除し、敵を倒し、前進することができます。',
+        'chinese': '使用这些元素效果来解锁新的区域，击败敌人，并取得进展。',
+        'spanish': 'Utiliza estos efectos elementales para desbloquear nuevas áreas, derrotar enemigos y progresar.',
+        'german': 'Nutze diese elementaren Effekte, um neue Gebiete freizuschalten, Feinde zu besiegen und voranzukommen.',
+        'french': "Utilisez ces effets élémentaires pour débloquer de nouvelles zones, vaincre des ennemis et progresser.",
+        'portuguese': 'Use estes efeitos elementares para destravar novas áreas, derrotar inimigos e progredir.',
+        'finnish': 'Käytä näitä elementtivaikutuksia avataksesi uusia alueita, voittaaksesi vihollisia ja edetäksesi.',
+        'korean': '이러한 원소 효과를 사용하여 새로운 영역을 잠금 해제하고 적을 물리치고 진행하십시오.',
+        'polish': 'Wykorzystaj te efekty żywiołów, aby odblokować nowe obszary, pokonać wrogów i robić postępy.',
+        'ukrainian': 'Використовуйте ці елементарні ефекти, щоб відкривати нові області, перемогти ворогів і прогресувати.',
+        'russian': 'Используйте эти элементарные эффекты, чтобы открывать новые области, побеждать врагов и продвигаться вперед.',
+    
+    },
+    'feature-1-text-3': {
+        'english': null,
+        'japanese': 'チームメイトと協力して、さまざまな相互作用を発見してください。',
+        'chinese': '与你的队友合作，发现所有不同的相互作用。',
+        'spanish': 'Trabaja con tus compañeros de equipo para descubrir todas las diferentes interacciones.',
+        'german': 'Arbeite mit deinen Teamkameraden zusammen, um alle verschiedenen Interaktionen zu entdecken.',
+        'french': "Travaillez avec vos coéquipiers pour découvrir toutes les différentes interactions.",
+        'portuguese': 'Trabalhe com seus colegas de equipe para descobrir todas as diferentes interações.',
+        'finnish': 'Tee yhteistyötä joukkuetovereidesi kanssa, jotta voit löytää kaikki erilaiset vuorovaikutukset.',
+        'korean': '팀원들과 협력하여 다양한 상호 작용을 모두 발견하십시오.',
+        'polish': 'Współpracuj z członkami swojej drużyny, aby odkryć wszystkie różne interakcje.',
+        'ukrainian': 'Попрацюйте зі своїми товаришами по команді, щоб дізнатися про різні взаємодії.',
+        'russian': 'Работайте с товарищами по команде, чтобы открыть всевозможные взаимодействия.',
+    
+    },
+    'hide-1': {
+        'english': null,
+        'japanese': 'ヒデ',
+        'chinese': '隐蔽',
+        'spanish': 'OCULTAR',
+        'german': 'VERSTECKEN',
+        'french': "CACHEZ",
+        'portuguese': 'SEJA',
+        'finnish': 'HIDE',
+        'korean': '숨다',
+        'polish': 'UKRYJ',
+        'ukrainian': 'СХОВАТИ',
+        'russian': 'СКРЫТЬ',
+    },
+    'feature-title-2': {
+        'english': null,
+        'japanese': 'オンライン多人数同時参加',
+        'chinese': '在线多人合作游戏',
+        'spanish': 'Co-op online para varios jugadores',
+        'german': 'Online-Mutliplayer-Koop',
+        'french': "Coopération multijoueur en ligne",
+        'portuguese': 'Mutliplayer Co-op Online',
+        'finnish': 'Online Mutliplayer Co-op',
+        'korean': '온라인 멀티플레이어 협동',
+        'polish': 'Sieciowa kooperacja dla wielu graczy',
+        'ukrainian': 'Кооператив для кількох гравців онлайн',
+        'russian': 'Кооперативный сетевой мультиплеер',
+    },
+    'read-more-2': {
+        'english': null,
+        'japanese': 'もっと読む',
+        'chinese': '阅读更多',
+        'spanish': 'LEER MÁS',
+        'german': 'LESEN SIE MEHR',
+        'french': "LIRE PLUS",
+        'portuguese': 'LEIA MAIS',
+        'finnish': 'LUE LISÄÄ',
+        'korean': '더 읽어보기',
+        'polish': 'CZYTAJ WIĘCEJ',
+        'ukrainian': 'ЧИТАЙТЕ БІЛЬШЕ',
+        'russian': 'ЧИТАТЬ ДАЛЕЕ',
+    },
+    'feature-2-text-1': {
+        'english': null,
+        'japanese': '仲間と一緒に...。',
+        'chinese': '与你的朋友一起工作...',
+        'spanish': 'Trabaja junto a tus amigos...',
+        'german': 'Arbeite mit deinen Freunden zusammen...',
+        'french': "Travaillez ensemble avec vos amis...",
+        'portuguese': 'Trabalhe junto com seus amigos...',
+        'finnish': 'Tee yhteistyötä ystäviesi kanssa...',
+        'korean': '친구와 함께 작업...',
+        'polish': 'Współpracuj z przyjaciółmi...',
+        'ukrainian': 'Працюйте разом з друзями...',
+        'russian': 'Работайте вместе со своими друзьями...',
+    
+    },
+    'feature-2-text-2': {
+        'english': null,
+        'japanese': 'そうでない場合も。',
+        'chinese': '或不合作。',
+        'spanish': 'O no.',
+        'german': 'Oder auch nicht.',
+        'french': "Ou pas.",
+        'portuguese': 'Ou não.',
+        'finnish': 'Tai sitten et.',
+        'korean': '아니면.',
+        'polish': 'Albo i nie.',
+        'ukrainian': 'Чи ні.',
+        'russian': 'Или нет.',
+    
+    },
+    'hide-2': {
+        'english': null,
+        'japanese': 'ヒデ',
+        'chinese': '隐藏',
+        'spanish': 'OCULTAR',
+        'german': 'HIDE',
+        'french': "HIDE",
+        'portuguese': 'SEJA',
+        'finnish': 'HIDE',
+        'korean': '숨다',
+        'polish': 'UKRYJ',
+        'ukrainian': 'СХОВАТИ',
+        'russian': 'HIDE',
+    },
+    'feature-title-3': {
+        'english': null,
+        'japanese': 'チームによるボス戦',
+        'chinese': '基于团队的BOSS战',
+        'spanish': 'Peleas de jefes en equipo',
+        'german': 'Teambasierte Bosskämpfe',
+        'french': "Combats de boss en équipe",
+        'portuguese': 'Lutas de chefes em equipe',
+        'finnish': 'Tiimipohjaiset pomotaistelut',
+        'korean': '팀 기반 보스전',
+        'polish': 'Drużynowe walki z bossami',
+        'ukrainian': 'Командні бої з босами',
+        'russian': 'Командные бои с боссами',
+    },
+    'read-more-3': {
+        'english': null,
+        'japanese': 'もっと読む',
+        'chinese': '查看更多',
+        'spanish': 'LEER MÁS',
+        'german': 'LESEN SIE MEHR',
+        'french': "LIRE PLUS",
+        'portuguese': 'LEIA MAIS',
+        'finnish': 'LUE LISÄÄ',
+        'korean': '더 읽어보기',
+        'polish': 'CZYTAJ WIĘCEJ',
+        'ukrainian': 'ЧИТАЙТЕ БІЛЬШЕ',
+        'russian': 'ЧИТАТЬ ДАЛЕЕ',
+    },
+    'feature-3-text-1': {
+        'english': null,
+        'japanese': 'ボスはストレートな戦いであり、複雑なパズルでもある。',
+        'chinese': '老板们既是直接的战斗，又是复杂的谜题。',
+        'spanish': 'Los jefes son tanto peleas directas como complejos rompecabezas.',
+        'german': 'Bosse sind sowohl direkte Kämpfe als auch komplexe Puzzles.',
+        'french': "Les boss sont à la fois des combats directs et des énigmes complexes.",
+        'portuguese': 'Os patrões são tanto lutas diretas quanto quebra-cabeças complexos.',
+        'finnish': 'Pomot ovat sekä suoria taisteluita että monimutkaisia pulmia.',
+        'korean': '보스는 직접적인 싸움이자 복잡한 퍼즐입니다.',
+        'polish': 'Bossowie to zarówno zwykłe walki, jak i skomplikowane łamigłówki.',
+        'ukrainian': 'Боси - це як прямі бої, так і складні головоломки.',
+        'russian': 'Боссы - это и прямые схватки, и сложные головоломки.',
+    
+    },
+    'feature-3-text-2': {
+        'english': null,
+        'japanese': 'エレメント変換で弱点を突け',
+        'chinese': '用你的元素转换来利用他们的弱点。',
+        'spanish': 'Aprovecha sus debilidades con tus transformaciones elementales.',
+        'german': 'Nutze ihre Schwächen mit deinen elementaren Verwandlungen aus.',
+        'french': "Tirez parti de leurs faiblesses grâce à vos transformations élémentaires.",
+        'portuguese': 'Tire proveito de suas fraquezas com suas transformações elementais.',
+        'finnish': 'Hyödynnä niiden heikkouksia elementtimuunnoksillasi.',
+        'korean': '당신의 원소 변형으로 그들의 약점을 이용하십시오.',
+        'polish': 'Wykorzystaj ich słabości dzięki transformacjom żywiołów.',
+        'ukrainian': 'Скористайтеся їхніми слабкостями за допомогою своїх стихійних трансформацій.',
+        'russian': 'Воспользуйтесь их слабостями с помощью своих элементарных превращений.',
+    
+    },
+    'feature-3-text-3': {
+        'english': null,
+        'japanese': 'ボスを倒すと、そのパワーを奪い、さらに多くのインタラクションを発見することができます。',
+        'chinese': '打败他们，窃取他们的力量，发现更多的互动。',
+        'spanish': 'Derrótalos para robar sus poderes y descubrir aún más interacciones.',
+        'german': 'Besiege sie, um ihre Kräfte zu stehlen und noch mehr Interaktionen zu entdecken.',
+        'french': "Battez-les pour voler leurs pouvoirs et découvrir encore plus d'interactions.",
+        'portuguese': 'Derrote-os para roubar seus poderes e descobrir ainda mais interações.',
+        'finnish': 'Voittaaksesi heidät voit varastaa heidän voimansa ja löytää vielä enemmän vuorovaikutusta.',
+        'korean': '그들을 물리치고 그들의 힘을 훔치고 더 많은 상호작용을 발견하세요.',
+        'polish': 'Pokonaj ich, aby ukraść ich moce i odkryć jeszcze więcej interakcji.',
+        'ukrainian': 'Перемагайте їх, щоб вкрасти їхні сили та відкрити ще більше взаємодій.',
+        'russian': 'Победите их, чтобы украсть их силы и открыть еще больше взаимодействий.',
+    
+    },
+    'feature-3-text-4': {
+        'english': null,
+        'japanese': 'その意気だ!',
+        'chinese': '这就是精神!',
+        'spanish': '¡Ese es el espíritu!',
+        'german': 'Das ist die richtige Einstellung!',
+        'french': "C'est ça l'esprit !",
+        'portuguese': 'Esse é o espírito!',
+        'finnish': 'Siinä on henki!',
+        'korean': '그 정신이야!',
+        'polish': 'To jest właśnie duch!',
+        'ukrainian': 'Це дух!',
+        'russian': 'Вот это дух!',
+    
+    },
+    'hide-3': {
+        'english': null,
+        'japanese': 'ヒデ',
+        'chinese': '隐蔽',
+        'spanish': 'OCULTAR',
+        'german': 'VERSTECKEN',
+        'french': "CACHEZ",
+        'portuguese': 'SEJA',
+        'finnish': 'HIDE',
+        'korean': '숨다',
+        'polish': 'UKRYJ',
+        'ukrainian': 'СХОВАТИ',
+        'russian': 'СКРЫТЬ',
+    },
 };
