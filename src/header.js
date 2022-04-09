@@ -645,7 +645,7 @@ const languageContent = {
         'english': null,
         'japanese': '腐敗した森と戦い、さまざまな元素の変身を発見し、ユニークな組み合わせを見つけて、仲間と一緒にスピリットウェルに帰ろう!',
         'chinese': '与腐败的森林作斗争，发现不同的元素转化，并找到独特的组合，与你的朋友一起返回灵井',
-        'spanish': 'Lucha contra el bosque corrompido, descubre diferentes transformaciones elementales y encuentra combinaciones únicas para volver al Pozo de los Espíritus con tus amigos.',
+        'spanish': 'Lucha contra el bosque corrupto, descubre diferentes transformaciones elementales y encuentra combinaciones únicas para volver al Pozo de los Espíritus con tus amigos.',
         'german': 'Kämpfe gegen den verderbten Wald, entdecke verschiedene elementare Verwandlungen und finde einzigartige Kombinationen, um mit deinen Freunden zum Geisterbrunnen zurückzukehren!',
         'french': "Combattez la forêt corrompue, découvrez différentes transformations élémentaires et trouvez des combinaisons uniques pour retourner au Puits des esprits avec vos amis !",
         'portuguese': 'Lute contra a floresta corrompida, descubra diferentes transformações elementais e encontre combinações únicas para voltar ao Spiritwell com seus amigos!',
@@ -659,7 +659,7 @@ const languageContent = {
         'english': null,
         'japanese': 'シェアライフに気をつけよう 一度外に出てしまうと、次の挑戦のためにスピリットウェルを通して一部の知識しか持ち帰ることができなくなります。',
         'chinese': '小心你的共享生命。一旦你出去了，你就只能通过灵井把一些知识带回来，供你下次尝试。',
-        'spanish': 'Cuidado con las vidas compartidas. Una vez que estés fuera, sólo podrás traer algunos conocimientos a través del Pozo de los Espíritus para tu próximo intento.',
+        'spanish': 'Cuidado con las vidas compartidas. Una vez que te quedes sin ellas, sólo podrás traer algunos conocimientos a través del Pozo de los Espíritus para tu próximo intento.',
         'german': 'Seid vorsichtig mit euren gemeinsamen Leben. Wenn ihr einmal draußen seid, könnt ihr nur ein gewisses Wissen für euren nächsten Versuch durch den Geisterbrunnen mitnehmen.',
         'french': "Attention à vos vies partagées. Une fois que vous serez sortis, vous ne pourrez ramener que certaines connaissances par le Puits des Esprits pour votre prochaine tentative.",
         'portuguese': 'Cuidado com suas vidas compartilhadas. Uma vez fora, você só poderá trazer algum conhecimento de volta através do Spiritwell para sua próxima tentativa.',
@@ -715,7 +715,7 @@ const languageContent = {
         'english': null,
         'japanese': '注目',
         'chinese': '敬请关注',
-        'spanish': 'SIGUE CONTINUANDO',
+        'spanish': 'MANTÉNGANSE AL TANTO',
         'german': 'DRANBLEIBEN',
         'french': "RESTEZ À L'ÉCOUTE",
         'portuguese': 'FIQUE ATENTO',
@@ -932,7 +932,7 @@ const languageContent = {
         'english': null,
         'japanese': 'ボスはストレートな戦いであり、複雑なパズルでもある。',
         'chinese': '老板们既是直接的战斗，又是复杂的谜题。',
-        'spanish': 'Los jefes son tanto peleas directas como complejos rompecabezas.',
+        'spanish': 'Los jefes pueden ser peleas directas o incluir complejos rompecabezas.',
         'german': 'Bosse sind sowohl direkte Kämpfe als auch komplexe Puzzles.',
         'french': "Les boss sont à la fois des combats directs et des énigmes complexes.",
         'portuguese': 'Os patrões são tanto lutas diretas quanto quebra-cabeças complexos.',
@@ -941,7 +941,6 @@ const languageContent = {
         'polish': 'Bossowie to zarówno zwykłe walki, jak i skomplikowane łamigłówki.',
         'ukrainian': 'Боси - це як прямі бої, так і складні головоломки.',
         'russian': 'Боссы - это и прямые схватки, и сложные головоломки.',
-    
     },
     'feature-3-text-2': {
         'english': null,
@@ -956,7 +955,6 @@ const languageContent = {
         'polish': 'Wykorzystaj ich słabości dzięki transformacjom żywiołów.',
         'ukrainian': 'Скористайтеся їхніми слабкостями за допомогою своїх стихійних трансформацій.',
         'russian': 'Воспользуйтесь их слабостями с помощью своих элементарных превращений.',
-    
     },
     'feature-3-text-3': {
         'english': null,
@@ -971,7 +969,6 @@ const languageContent = {
         'polish': 'Pokonaj ich, aby ukraść ich moce i odkryć jeszcze więcej interakcji.',
         'ukrainian': 'Перемагайте їх, щоб вкрасти їхні сили та відкрити ще більше взаємодій.',
         'russian': 'Победите их, чтобы украсть их силы и открыть еще больше взаимодействий.',
-    
     },
     'feature-3-text-4': {
         'english': null,
@@ -986,7 +983,6 @@ const languageContent = {
         'polish': 'To jest właśnie duch!',
         'ukrainian': 'Це дух!',
         'russian': 'Вот это дух!',
-    
     },
     'hide-3': {
         'english': null,
