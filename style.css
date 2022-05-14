@@ -324,9 +324,6 @@ body.loaded .mobileRotate.visible .rightArrow {
     top: 50vmin;
     left: 50vw;
 
-    /* font-size: calc(3rem + 24px); */
-    /* transform: translateX(-50%) translateY(-50%); */
-
     color: #ffffff;
     letter-spacing: 4px;
 
