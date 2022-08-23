@@ -643,7 +643,8 @@ const languageCodeMap = {
 const languageContent = {
     'description-top': {
         'english': null,
-        'japanese': '腐敗した森と戦い、さまざまな元素の変身を発見し、ユニークな組み合わせを見つけて、仲間と一緒にスピリットウェルに帰ろう!',
+        'japanese': '木霊として腐敗した森と戦い、さまざまな元素の変身を発見し、ユニークな組み合わせを見つけて、仲間と一緒にスピリットウェルに帰ろう!',
+        // 'japanese': '腐敗した森と戦い、さまざまな元素の変身を発見し、ユニークな組み合わせを見つけて、仲間と一緒にスピリットウェルに帰ろう!',
         'chinese': '与腐败的森林作斗争，发现不同的元素转化，并找到独特的组合，与你的朋友一起返回灵井',
         'spanish': 'Lucha contra el bosque corrupto, descubre diferentes transformaciones elementales y encuentra combinaciones únicas para volver al Pozo de los Espíritus con tus amigos.',
         'german': 'Kämpfe gegen den verdorbenen Wald, entdecke verschiedene elementare Verwandlungen und finde einzigartige Kombinationen, um mit deinen Freunden zum Geisterbrunnen zurückzukehren!',
