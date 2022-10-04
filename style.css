@@ -540,7 +540,29 @@ body.mobile .subscribe .half .subscribeImage {
     left: calc(-80px + 4rem);
 }
 
-.subscribe .half .title {
+.subscribe .half .steam {
+    display: block;
+
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    height: auto;
+}
+
+body.mobile .subscribe .half .steam {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+
+body.mobile .subscribe .half .steam .steamImage {
+    position: relative;
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+/* .subscribe .half .title {
     font-size: 2.5rem;
 
     margin-top: 2rem;
@@ -551,7 +573,7 @@ body.mobile .subscribe .half .subscribeImage {
     font-size: 2rem;
 
     margin-bottom: 0rem;
-}
+} */
 
 .subscribe .half .button {
     position: relative;
@@ -568,12 +590,16 @@ body.mobile .subscribe .half .subscribeImage {
 
     padding: 2px;
 
+    width: 80%;
+
     background-color: #e0986c;
 
 }
 
 body.mobile .subscribe .half .button {
     left: 0;
+
+    width: 100%;
 }
 
 .subscribe .half .button input {
